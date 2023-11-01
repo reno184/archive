@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1, user-scalable=no">
+    <title>Proto connect</title>
+      <meta name="robots" content="noindex, nofollow">
+      <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon-16x16.png">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
+      <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <script defer src="assets/qrcode.min.js"></script>
+    <script defer src="assets/app.js"></script>
+    <style media="screen">
+      body { background: #ECEFF1; margin: 0; padding: 0;font-family: 'Noto Sans JP', sans-serif;}
+      .card { background: white; max-width: 360px;  padding: 10px; border-radius: 3px;box-shadow: 1px 1px 3px rgba(0,0,0,.3) }
+      h3{ margin: 0}
+    </style>
+  </head>
+  <body style="overflow-y: hidden">
+  <div style="display:flex;align-items: center;justify-content: center;height: 100vh;">
+    <div id="notconnected" class="card" style="display: none; margin: -100px 20px 0 20px">
+     <form style="text-align: center">
+       <h3 style="margin-top: 0px">Connexion</h3>
+        <label><input type="text" placeholder="username" name="username" required></label>
+        <label><input type="password" placeholder="password" name="password" required></label>
+        <footer style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+          <input type="submit">
+        </footer>
+      </form>
+      <p id="error" style="color:red; text-align: center"></p>
+    </div>
+   <div id="connected" style="display: none;text-align: center;" class="card">
+      <button id="signout">Sign Out</button>
+      <div id="container" style="overflow-y: auto; max-height: 70vh; padding: 40px 0" >Chargement...</div>
+    </div>
+  </div>
+  <small>v10-10-20-1</small>
+  </body>
+
+</html>

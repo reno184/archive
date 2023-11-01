@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "public",
+    "target" : "mambaprotoconnect_alias",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="app" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Main</title>
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/regular.min.css">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/typeahead-standalone@3.0.1/dist/typeahead-standalone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+  <style>
+ /*   body{
+      background: #fffde3 url('/assets/img/texture.png');
+    }*/
+    input[type=search]{
+      border: solid 1px #eee;
+      outline: none;
+      padding: .375rem .75rem;
+      width: 100%;
+      color:#999;
+      border-radius: 5px;
+    }
+
+    /* override styles */
+ /*noinspection ALL*/
+ .app .typeahead-standalone .tt-list .tt-suggestion:hover, .app .typeahead-standalone .tt-list .tt-suggestion.tt-selected{
+      color: #0d6efd;
+      background-color: white;
+    }
+     .app .typeahead-standalone .tt-list{
+       border: none;
+       box-shadow: 2px 2px 2px rgba(0,0,0,.4);
+       padding: 10px 5px
+     }
+     .app .typeahead-standalone .tt-list .tt-suggestion{
+       line-height: 2.2;
+     }
+  </style>
+</head>
+<body style="background-color: #efefef">
+<div class="container-fluid d-flex flex-column" style="height: 100vh">
+<!--  <button data-bind="click: addBasket('toto')"> Add</button>-->
+  <div class="text-center py-3 mt-3" style="width: 100%">
+    <img src="./assets/img/ko-logo.png">
+  </div>
+  <div class="row flex-grow-1 mt-3" >
+    <div class="col-12 col-md-8 offset-md-2">
+      <input type="search" class="border border-grey" id="searchInput" placeholder="Search...">
+      <div class="mt-3">
+        <h4 class="py-2">Votre panier</h4>
+        <div data-bind="if: itemsBasket().length === 0">
+          <div class="bg bg-white text-center py-3 border border-grey rounded">Panier vide</div>
+        </div>
+          <ul class="list-group" data-bind="foreach: itemsBasket, visible: itemsBasket().length > 0" >
+            <li  class="list-group-item d-flex pe-1">
+              <span class="flex-grow-1"  >
+                <span data-bind="if: loading" >...</span>
+                <span data-bind="ifnot: loading">
+                  <span data-bind="text: name" ></span>
+                </span>
+              </span>
+              <a href="#" class="me-2 fst-italic text-decoration-none"><small>vérifier stock</small></a>
+              <a href="#" data-bind="click: $parent.modalShow" class="me-2 fst-italic text-decoration-none"><small>commander</small></a>
+              <a href="#" data-bind="click: $parent.removeItemBasket"  class="fst-italic text-decoration-none" ><small>supprimer</small></a>
+
+            </li>
+          </ul>
+      </div>
+      <div class="mt-3">
+        <h4 class="py-2">Commandes en cours</h4>
+        <div data-bind="if: itemsOrdered().length === 0">
+          <div class="bg bg-white text-center py-3 border border-grey rounded">Pas de commande en cours...</div>
+        </div>
+        <ul class="list-group" data-bind="foreach: itemsOrdered" >
+          <li  class="list-group-item d-flex">
+              <span class="flex-grow-1"  >
+                <span data-bind="if: loading" >...</span>
+                <span data-bind="ifnot: loading">
+                  <span data-bind="text: name" ></span>
+                </span>
+              </span>
+            <a href="#">
+              <small>Demander une estimation</small>
+            </a>
+            <a href="#" data-bind="click: $parent.removeItemOrdered" class="ms-1" >
+              <small>Avez-vous été servie ?</small>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="mt-3" data-bind="visible: itemsOnTable().length > 0">
+        <h4 class="py-2">Commandes à table</h4>
+        <ul class="list-group" data-bind="foreach: itemsOnTable" >
+          <li  class="list-group-item d-flex">
+              <span class="flex-grow-1" data-bind="text: name"  ></span>
+              <a href="#"  >
+                <small>Annuler</small>
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="d-flex justify-content-center">
+  <nav class="d-flex bg-white shadow-sm rounded py-3 my-3" style="width: 300px">
+    <a href="order.html" class="flex-grow-1 primary text-center"><i class="far fa-list"></i></a>
+    <a href="addition.html" class="flex-grow-1 text-dark text-center"><i class="far fa-dollar-sign"></i></a>
+    <a href="call.html" class="flex-grow-1 text-dark text-center"><i class="far fa-bell"></i></a>
+    <a href="info.html" class="flex-grow-1 text-dark text-center"><i class="far fa-info-circle"></i></a>
+  </nav>
+</div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled" data-bind="foreach: { data: questionsModal, as: 'question' }" >
+          <li data-bind="text: name"></li>
+          <ul data-bind="foreach: reponses">
+            <li class="form-check">
+              <input type="checkbox" class="form-check-input" data-bind="checkedValue: { data: $data, questionId: question.id}, checked: $root.choixQuestion" >
+              <label class="form-check-label d-flex" >
+                <span data-bind="text: name" class="me-1"></span>
+                <hr class="flex-grow-1">
+                <span data-bind="text: extra" class="mx-1"></span>
+              </label>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="text-secondary text-decoration-none" data-bind="click: modalHide">Close</a>
+        <button type="button" class="btn btn-primary" data-bind="enable: valid, click: submitChoixQuestion" >
+          <span data-bind="visible: modalSubmitSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  function  MyViewModel() {
+
+    var self = this;
+    self.modalSubmitSpinner =  ko.observable(false);
+    self.itemsBasket = ko.observableArray([]);
+    self.itemsOrdered = ko.observableArray([]);
+    self.itemsOnTable = ko.observableArray([]);
+    self.questionsModal = ko.observableArray([]);
+    self.choixQuestion = ko.observableArray([]);
+    self.currentItem = {}
+
+    this.valid = ko.computed(function() {
+      let pass= true
+      let validators = {}
+      this.questionsModal().forEach(question =>{
+        validators[question.id] = 0
+        this.choixQuestion().forEach(choix =>{
+          if(choix.questionId === question.id){
+            validators[question.id]++
+          }
+        })
+      })
+      for (let key in validators) {
+         if(validators[key]===0){
+           pass = false
+         }
+      }
+      return pass;
+    }, this);
+
+    this.initDOM = function(){
+      self.myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+        keyboard: false
+      })
+      service.fetchQuestion().then(data => self.questionsModal(data))
+    }
+
+
+    this.addItemBasket = function(item){
+      self.itemsBasket.push(item)
+    }
+    this.removeItemBasket = function(item) {
+      self.itemsBasket.remove(item)
+    };
+    this.modalShow = function(item){
+      self.myModal.show()
+      self.currentItem =item
+    }
+    this.modalHide = function(){
+      self.myModal.hide()
+      self.currentItem = {}
+      self.choixQuestion([])
+    }
+    this.submitChoixQuestion = function(){
+      self.modalSubmitSpinner(true)
+      self.currentItem.questions = self.choixQuestion()
+      service.fake().then(()=>{
+        self.modalSubmitSpinner(false)
+        self.removeItemBasket(self.currentItem)
+        self.itemsOrdered.push(self.currentItem)
+        this.modalHide()
+      })
+    }
+
+    this.removeItemOrdered = function(value) {
+      self.itemsOrdered.remove(value)
+      self.itemsOnTable.push(value)
+    };
+  };
+
+  const appModel = new MyViewModel()
+  ko.applyBindings(appModel);
+
+ const service = (function(){
+     const _fake = function(){
+       return new Promise(resolve => {
+         setTimeout(function(){
+           resolve()
+         },1000)
+       })
+     }
+    const _fechCarte = async function(){
+      const rep = await fetch('http://localhost:5001/dev-mamba/us-central1/getPrice')
+      return await rep.json()
+    }
+
+    const _fechQuestion= async function(id){
+      const rep = await fetch('http://localhost:5001/dev-mamba/us-central1/getQuestions')
+      return await rep.json()
+    }
+
+   return {
+     fetchCarte: _fechCarte,
+     fetchQuestion: _fechQuestion,
+     fake: _fake
+   }
+ })()
+
+  document.addEventListener('DOMContentLoaded', async function  () {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+    appModel.initDOM();
+    const data = await service.fetchCarte()
+    const inputElement = document.getElementById("searchInput");
+    typeahead({
+      input: inputElement,
+      minLength : 2,
+      templates: {
+        notFound: '<div>Nothing Found</div>', /* Rendered if 0 suggestions are available */
+      },
+      source: {
+        local: data.articlePrice,
+        identifier : 'name'
+      },
+       onSelect: function (selectedItem, inputEl) {
+        inputEl.value = ''
+        appModel.addItemBasket({ id : selectedItem.id, name: selectedItem.name, loading : ko.observable(false) })
+       }
+    });
+  });
+</script>
+
+
+</body>
+</html>

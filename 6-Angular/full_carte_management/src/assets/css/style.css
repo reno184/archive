@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+.rhe body {
+    font-family: 'Fira Sans', sans-serif;
+    background: url('./brick-wall.png');
+    /* font-size: 60%;*/
+}
+
+.bg-white {
+    background: white;
+}
+
+a:hover{
+    text-decoration: none!important;
+}
+
+i.toggle {
+    /* opacity: 1;
+     visibility: visible;
+     transition: opacity .5s, transform .5s, visibility .5s;*/
+    transform: rotateX(-180deg) translateY(0px);
+    transition: transform .5s
+}
+
+i.toggle.active {
+    /*opacity: 0;
+    visibility: hidden;*/
+    transform: rotateX(0deg) translateY(0px)
+}
+
+div.toggle {
+   display: none;
+}
+
+div.toggle.active {
+   display: block;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rhe a.text-warning:focus, .rhe a.text-warning:hover {
+    color: #ffc107 !important;
+}
+
+.rhe .modal ul li.list-group-item{
+    flex-shrink: 0;
+}
+
+
+

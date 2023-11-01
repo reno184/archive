@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Times, Times New Roman, Georgia, serif;
+            background: #fffde3 url("./assets/img/texture.png");
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="assets/img/icon-32x32.png" width="30" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="order.html">Order</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="addition.html">Addition</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid" style="height: 100vh">
+    <div class="row">
+        <div class="col-xs-12 offset-sm-2 col-sm-8 offset-md-3 col-md-6" style="height: 100%">
+            <div class="card shadow-sm mt-5">
+                <div class="card-header">
+                    Connexion
+                </div>
+                <form class="card-body" style="display: none">
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" name="code_0" maxlength="1" class="form-control" style="padding:0;text-align:center" autofocus="true">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="code_1" maxlength="1" class="form-control" style="padding:0;text-align:center">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="code_2" maxlength="1" class="form-control" style="padding:0;text-align:center">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="code_3" maxlength="1" class="form-control" style="padding:0;text-align:center">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="code_4" maxlength="1" class="form-control" style="padding:0;text-align:center">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="code_5" maxlength="1" class="form-control" style="padding:0;text-align:center">
+                        </div>
+                        <div class="col">
+                            <input type="text" name="code_6" maxlength="1" class="form-control" style="padding:0;text-align:center">
+                        </div>
+                    </div>
+                    <div class="text-center  mt-4">
+                        <div class="g-recaptcha"  style="display: inline-block" data-sitekey="6LerzhobAAAAABx9MZdPJBSvk5TsLocVFFQSD2mC"></div>
+                    </div>
+                    <input type="submit" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <pre><small id="txtToken" >Get token with recaptcha</small></pre>
+                    <button id="btnVerify" class="btn btn-primary" disabled>Verify</button>
+                    <div id="pnlSuccess" class="bg-success rounded mt-3 py-1 px-3 text-white" style="display: none">Token signed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.app = (function () {
+        const REDIRECT_PAGE = "order.html";
+        const URL ='http://localhost:5001/dev-mamba/us-central1'
+        //const URL = 'https://us-central1-dev-mamba.cloudfunctions.net'
+        const _verify = function (jwt) {
+            return fetch(URL + "/verify", {headers: {['authorization']: jwt}})
+                .then((rep) => rep.text())
+        }
+        const _sendCode = function (value, recaptcha) {
+            return new Promise((resolve, reject) => {
+                fetch(URL + "/recaptcha?geoposition=" + value, {headers: {['g-recaptcha-response']: recaptcha}})
+                    .then((rep) => rep.json())
+                    .then((data) => {
+                        resolve(data)
+                    })
+                    .catch(err => reject(err))
+            })
+        }
+        const _fillForm = function (value) {
+            for (var i = 0; i < value.length; i++) {
+                $('input[type=text]').eq(i).val(value[i])
+            }
+        }
+
+        return {
+            fillForm: _fillForm,
+            sendCode : _sendCode,
+            verify : _verify
+        }
+    })()
+
+    window.addEventListener('load', function (e) {
+            app.fillForm('HywvWSlk');
+            $('form').show().on('submit', function (e) {
+                e.preventDefault();
+                window.localStorage.removeItem("token");
+                let code = ''
+                for (let i = 0; i < $(this).find('input[type=text]').length; i++) {
+                    code += e.target[`code_${i}`].value
+                }
+                $("#txtToken").text('...')
+                service.sendCode(code, grecaptcha.getResponse()).then(data=> {
+                    window.localStorage.setItem("geoposition",data.code)
+                    $("#txtToken").text(data.token)
+                    document.getElementById('btnVerify').removeAttribute('disabled')
+                    window.localStorage.setItem("token",data.token)
+                })
+            })
+
+            document.getElementById('btnVerify').addEventListener("click",function(e){
+                const token = window.localStorage.getItem("token");
+                if(token){
+                    service.verify(token).then(()=>{
+                       $("#pnlSuccess").show();
+                    })
+                }
+            })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+
+    match /databases/{database}/documents {
+
+        // vérification qu'il ne reste plus de question attachée à l'article avant suppression
+        // vérification que l'article n'est pas attaché à une ou plusieurs prices
+        match /resto/{placeId}/article/{articleId} {
+            allow read, create, update: if isSignedIn();
+            allow delete: if isSignedIn() && resource.data.counterBlock == 0 ;
+        }
+        match /resto/{placeId}/article/{articleId}/block/{blockId} {
+            allow read, write: if isSignedIn();
+        }
+
+        match /resto/{placeId}/group/{groupId} {
+            allow list: if isSignedIn();
+        }
+
+        match /resto/{placeId}/formule/{formuleId} {
+            allow list: if isSignedIn();
+        }
+
+        match /resto/{placeId}/price/{priceId} {
+            allow read, write: if isSignedIn();
+        }
+
+        // les questions peuvent être rattachés à un ou plusieurs articles
+        match /resto/{placeId}/question/{questionId} {
+            allow read, create, update: if isSignedIn();
+            allow delete: if isSignedIn() && resource.data.articles.size()< 1;
+        }
+        // les reponses sont une sub collection aux questions donc il n'y pas de controle à faire
+        match /resto/{placeId}/question/{questionId}/answer/{answerId} {
+            allow read, write: if isSignedIn();
+        }
+        match /resto/{placeId}/stat/{statId} {
+            allow list: if isSignedIn();
+        }
+        match /resto/{placeId}/zone/{zoneId} {
+            allow read, write: if isSignedIn();
+        }
+    }
+    function isSignedIn() {
+        return request.auth != null;
+    }
+    function isSuperSignedIn(placeId) {
+        return request.auth != null && (get(/databases/$(database)/documents/userAdmin/$(request.auth.uid)).data.placeId == placeId);
+    }
+}

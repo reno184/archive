@@ -1,0 +1,25 @@
+{
+  "name": "protoConnect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run dev": "firebase serve",
+    "deploy": "firebase deploy --only hosting:mambaprotoconnect_alias",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reno184/proto_connect.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reno184/proto_connect/issues"
+  },
+  "homepage": "https://github.com/reno184/proto_connect#readme",
+  "dependencies": {
+    "firebase": "^7.21.1"
+  }
+}

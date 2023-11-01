@@ -1,0 +1,39 @@
+[
+  {
+    "id": "q1",
+    "name": "question 1",
+    "reponses": [
+      {
+        "id": "r1",
+        "name": "reponse 1",
+        "extra": 0
+      },
+      {
+        "id": "r2",
+        "name": "reponse 2",
+        "extra": 2.4
+      },
+      {
+        "id": "r3",
+        "name": "reponse 3",
+        "extra": 0
+      }
+    ]
+  },
+  {
+    "id": "q2",
+    "name": "question 2",
+    "reponses": [
+      {
+        "id": "r1",
+        "name": "reponse 1",
+        "extra": 1.2
+      },
+      {
+        "id": "r2",
+        "name": "reponse 2",
+        "extra": 0
+      }
+    ]
+  }
+]
