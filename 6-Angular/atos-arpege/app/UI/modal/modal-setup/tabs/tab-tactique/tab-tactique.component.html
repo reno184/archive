@@ -1,0 +1,13 @@
+<div>
+    <ul class="tab">
+         <li *ngFor="let pci of formArr.controls; let iPciGroup = index">
+          <a queryParamsHandling="preserve" routerLink="pci/pci{{iPciGroup+1}}" routerLinkActive="active">
+                <span [ngClass]="{'text-grey' : !pci.value['pci-actif'] }">{{pci.value['pci-name']}}</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['./participant']" queryParamsHandling="preserve" routerLinkActive="active" style="border-color:#dc1212">Participants</a>
+        </li>
+    </ul>
+<router-outlet></router-outlet>
+</div>

@@ -1,0 +1,25 @@
+<h3 style="text-align: center">{{ labelModalMenu.title }}</h3>
+    <a routerLink="/" style="position:absolute;top:5px;right:5px" title="close">
+      <i class="fas fa-times-circle"></i>
+    </a>
+<hr class="hr">
+
+<div class="modal-content" style="width: 700px">
+    <div style="display: flex;flex-flow: row wrap; justify-content: center">
+        <ng-container *ngFor="let section of staticModalMenu.sections">
+            <ng-container *ngIf="isRole(section.roles, userRole)">
+                <section class="border" style="border: solid 1px transparent;border-radius: 4px;padding: 10px; margin: 10px;width: 40%">
+                    <h4 style="text-align: center;margin: 10px 0"><i class="far {{section.icon}}" style="margin-right: 5px"></i>{{ section.title }}</h4>
+                    <ul>
+                        <li *ngFor="let link of section.links" style="text-align: center;line-height: 1.5">
+                            <a [queryParams]="link.queryParams" [routerLink]="[link.url,  {outlets : { front: link.outlet || null } }]" title="{{ link.title }}">
+                                <i class="far {{link.icon}}" style="margin-right: 5px"></i>
+                                <span>{{ link.value }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

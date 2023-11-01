@@ -1,0 +1,74 @@
+{
+  "logo": "Avantix",
+  "version": "V.0.0.9",
+  "providers": {
+    "basic": {
+      "url_part2": "/styles/klokantech-basic",
+      "attribution": "Map basic (offline)",
+      "url_part3": "/{z}/{x}/{y}.png",
+      "url_part3_test": "/1/1/1.png"
+    },
+    "satellite": {
+      "url_part2": "/data/openmaptiles_satellite_lowres",
+      "url_part3": "/{z}/{x}/{y}.jpg",
+      "url_part3_test": "/1/1/1.jpg",
+      "attribution": "Map satellite (offline)"
+    }
+  },
+  "trackType": {
+    "0": {
+      "lib": "piste",
+      "imgPath": "TRACK"
+    },
+    "1": {
+      "lib": "unité",
+      "imgPath": "UNIT"
+    }
+  },
+  "trackActive": {
+    "0": {
+      "lib": "active",
+      "imgPath": "ACTIVE"
+    },
+    "1": {
+      "lib": "inactive",
+      "imgPath": "INACTIVE"
+    }
+  },
+  "trackKill": {
+    "0": {
+      "lib": "alive",
+      "imgPath": "ALIVE"
+    },
+    "1": {
+      "lib": "killed",
+      "imgPath": "KILLED"
+    }
+  },
+  "signaux": {
+    "TN": {
+      "lib": "tn",
+      "regex": "^[A-Z-0-9]$",
+      "min": 0,
+      "max": 5
+    },
+    "IFF1": {
+      "lib": "iff1",
+      "regex": "^[0-7]{1}[0-3]{1}$",
+      "min": 2,
+      "max": 2
+    },
+    "IFF3": {
+      "lib": "iff3",
+      "regex": "^[0-7]{4}$",
+      "min": 4,
+      "max": 4
+    },
+    "VCS": {
+      "lib": "vcs",
+      "regex": "^[AZ][09]$",
+      "min": 0,
+      "max": 110
+    }
+  }
+}

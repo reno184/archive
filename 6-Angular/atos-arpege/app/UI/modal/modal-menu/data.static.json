@@ -1,0 +1,125 @@
+{
+  "sections": [
+    {
+      "title": "Connectivité",
+      "icon": "fa-link",
+      "roles": [
+        "PCI",
+        "PPSRM"
+      ],
+      "links": [
+        {
+          "value": "Configuration",
+          "title": "Configuration"
+        },
+        {
+          "value": "Réseau",
+          "title": "Réseau"
+        }
+      ]
+    },
+    {
+      "title": "Préparation mission",
+      "icon": "fa-play",
+      "roles": [
+        "PCI",
+        "PPSRM"
+      ],
+      "links": [
+        {
+          "url": "../setup/detail",
+          "value": "Nouvelle",
+          "title": "Nouvelle"
+        },
+        {
+          "url": "../setup/list",
+          "value": "Vos préparations",
+          "title": "Vos préparations"
+        }
+      ]
+    },
+    {
+      "title": "Réglages",
+      "icon": "fa-cogs",
+      "roles": [
+        "PCI",
+        "PPSRM"
+      ],
+      "links": [
+        {
+          "value": "Unités",
+          "title": "Unités, distance, altitude...."
+        },
+        {
+          "value": "Bulleye",
+          "title": "Bulleye title"
+        }
+      ]
+    },
+    {
+      "title": "Charge utile",
+      "icon": "fa-wifi",
+      "roles": [
+        "PCI",
+        "PPSRM"
+      ],
+      "links": [
+        {
+          "value": "Configuration",
+          "title": "Gestion, IP, test connexion"
+        },
+        {
+          "value": "Etat",
+          "title": "Etat matériel PCI"
+        }
+      ]
+    },
+    {
+      "title": "Librairies",
+      "icon": "fa-folders",
+      "roles": [
+        "PCI",
+        "PPSRM"
+      ],
+      "links": [
+        {
+          "url": "/",
+          "outlet": "front/fo/list",
+          "value": "Formes d'onde",
+          "title": "Formes d'ondes",
+          "icon": "fa-waveform  mr-5"
+        },
+        {
+          "url": "/",
+          "outlet": "front/geo/list",
+          "queryParams": {
+            "marker-type": "point"
+          },
+          "value": "Points d'intérêts",
+          "title": "Points d'intérêts",
+          "icon": "fa-map-marker-alt mr-10"
+        },
+        {
+          "url": "/",
+          "outlet": "front/geo/list",
+          "queryParams": {
+            "marker-type": "interet"
+          },
+          "value": "Zones d'intérêts",
+          "title": "Zones d'intérêts",
+          "icon": "fa-draw-polygon text-success  mr-10"
+        },
+        {
+          "url": "/",
+          "outlet": "front/geo/list",
+          "queryParams": {
+            "marker-type": "interdit"
+          },
+          "value": "Zones inihibées",
+          "title": "Zones inihibées",
+          "icon": "fa-draw-square text-danger  mr-10"
+        }
+      ]
+    }
+  ]
+}

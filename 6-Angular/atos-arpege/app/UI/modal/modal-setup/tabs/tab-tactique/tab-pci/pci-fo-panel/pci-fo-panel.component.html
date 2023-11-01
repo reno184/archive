@@ -1,0 +1,51 @@
+<div style="height:100%;width: 300px; border: solid 1px #aaa;background-color: #fefefe;padding-left: 10px">
+    <header class="border" style="text-align: center;padding: 10px; border-bottom: solid 1px transparent"><strong>Forme d'onde</strong></header>
+        <main *ngIf="!foInfo" style="height: 300px; display: flex;align-items: center;justify-content: center;">
+            <i class="far fa-wave-triangle fa-2x"></i>
+        </main>
+        <main *ngIf="foInfo" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; row-gap: 10px; align-items: center;padding-top: 20px">
+            <!-- ligne 1 -->
+        <strong><small>Nom</small></strong>
+        <small>{{foInfo.FO_NAME}}</small>
+        <strong><small>Mode</small></strong>
+        <small class="ellipsis">{{staticDatas.objects['fo-mode'][foInfo.FO_MODE]}}</small>
+            <!-- ligne 2 -->
+        <strong><small>Class</small></strong>
+        <small>{{appInitService.staticDatas.dropdownlist.foClass[foInfo.FO_CLASS]}}</small>
+        <strong><small>Couleur</small></strong>
+        <div [ngStyle]="{background : foInfo.FO_COLOR}" style="height: 10px; width: 10px"></div>
+            <!-- ligne 3 -->
+        <strong><small>Fmoy</small></strong>
+        <small>{{foInfo.FO_FREQ}} Mhz</small>
+        <strong><small>P.R.I</small></strong>
+        <small>{{foInfo.FO_PRI}} ms</small>
+            <!-- ligne 4 -->
+        <strong><small>L.I</small></strong>
+        <small>{{foInfo.FO_LI}} s</small>
+        <strong><small>Attn</small></strong>
+        <small>{{foInfo.FO_ATTEN}} db</small>
+            <!--  -->
+        <strong><small>R.T</small></strong>
+        <small>{{foInfo.FO_RT}} s</small>
+        <strong><small>Nbr Cible</small></strong>
+        <small>{{foInfo.FO_MAX_TARGET}}</small>
+            <!--  -->
+        <strong><small>Altitude de</small></strong>
+        <small>{{foInfo.FO_ALT_MIN}}</small>
+        <strong><small>km à</small></strong>
+        <small>{{foInfo.FO_ALT_MIN}} km</small>
+            <!--  -->
+        <strong><small>Rayon de</small></strong>
+        <small>{{foInfo.FO_RAD_MIN}}</small>
+        <strong><small>km à</small></strong>
+        <small>{{foInfo.FO_RAD_MAX}} km</small>
+            <!--  -->
+        <strong>
+            <small>Kill</small>
+        </strong>
+        <small *ngIf="!foInfo.FO_KILL_STATUS" style="grid-column: span 3">inactif</small>
+        <small *ngIf="foInfo.FO_KILL_STATUS">actif</small>
+        <strong *ngIf="foInfo.FO_KILL_STATUS"><small>toutes les</small></strong>
+        <small>{{foInfo.FO_KILL}}s</small>
+    </main>
+</div>

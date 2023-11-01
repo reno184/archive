@@ -1,0 +1,20 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Popover hello word",
+                "form": "Popover",
+                "bulleye": false,
+                "'icon-class'": "fa-truck",
+                "zoom": 9,
+                "altitude": 0
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [5.182628631591797, 43.42649456970131]
+            }
+        }
+    ]
+}

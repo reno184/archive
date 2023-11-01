@@ -1,0 +1,9 @@
+mixin input(libelle)
+    div.form-group
+        label.d-none.d-sm-block= libelle
+        input.form-control.mb-2.mr-sm-2&attributes(attributes)
+
+mixin checkbox(libelle,id)
+    div.form-group.form-check
+        input.form-check-input(type="checkbox",id= id,name=attributes.name)
+        label.form-check-label(for=id)= libelle

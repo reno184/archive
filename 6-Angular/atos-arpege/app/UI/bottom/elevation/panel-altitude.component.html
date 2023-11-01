@@ -1,0 +1,21 @@
+<div [ngClass]="{active : isExpanded}" class="elevation">
+
+
+        <div style="text-align: right;margin-right:100px ">
+               <a (click)="onToggle()" class="bg bg-white border border-grey " id="btnToggle" style="display: inline-block;padding: 7px 20px;
+               border: solid 1px transparent;
+               border-bottom: none;
+               border-top-left-radius: 5px;
+                border-top-right-radius: 5px;"><i class="far fa-plane-departure"></i></a>
+        </div>
+
+
+        <div class="bg bg-white border  border-dark" style="flex:1; border: solid 1px transparent;">
+            <svg style="width: 100%;height: 100%">
+                <g id="groupYAxisLeft"></g>
+                <g id="groupYAxisRight"></g>
+                <g id="groupLines"></g>
+                <g id="groupPistes" stroke-width="1"></g>
+            </svg>
+        </div>
+</div>

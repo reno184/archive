@@ -1,0 +1,37 @@
+<a [ngClass]="{ 'is-open': obs$ | async }" class="menu-backdrop" routerLink="/"></a>
+<div [ngClass]="{ 'is-open': obs$ | async }" class="drawer test_1">
+    <nav>
+        <a [ngClass]="{ 'is-active':   (obs$ | async) === 'piste'}" [queryParams]="{'menu-right' : 'piste'}" class="test_2" routerLink="/">
+            <i class="far fa-list fa-lg"></i>
+        </a>
+        <a [ngClass]="{ 'is-active':   (obs$ | async) === 'fo'}" [queryParams]="{'menu-right' : 'fo'}" class="test_3" routerLink="/">
+            <i class="far fa-wave-square"></i>
+        </a>
+        <a [ngClass]="{ 'is-active':   (obs$ | async) === 'geo'}" [queryParams]="{'menu-right' : 'geo'}" routerLink="/">
+            <i class="far fa-draw-polygon fa-lg"></i>
+        </a>
+        <a [ngClass]="{ 'is-active':   (obs$ | async) === 'logAction'}" [queryParams]="{'menu-right' : 'logAction'}" routerLink="/">
+            <i class="far fa-headset fa-lg"></i>
+        </a>
+        <a [ngClass]="{ 'is-active':   (obs$ | async) === 'logSystem'}" [queryParams]="{'menu-right' : 'logSystem'}" routerLink="/">
+            <i class="far fa-chart-network fa-lg"></i>
+        </a>
+    </nav>
+   <main>
+        <section [ngClass]="{ 'is-active':   (obs$ | async) === 'piste'}" style="height:100%;overflow-y: auto">
+            <app-piste-list></app-piste-list>
+        </section>
+        <section [ngClass]="{ 'is-active':   (obs$ | async) === 'fo'}">
+            <h4>Formes d'ondes</h4>
+        </section>
+        <section [ngClass]="{ 'is-active':   (obs$ | async) === 'geo'}">
+            <h4>Zones d'intérêts/interdites</h4>
+        </section>
+        <section [ngClass]="{ 'is-active':   (obs$ | async) === 'logAction'}">
+            <h4>Log actions</h4>
+        </section>
+        <section [ngClass]="{ 'is-active':   (obs$ | async) === 'logSystem'}">
+            <h4>Log système</h4>
+        </section>
+    </main>
+</div>

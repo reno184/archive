@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample2</title>
+  <style>
+    body {
+      Font-family: Consolas, monaco, monospace;
+    }
+    input[type="password"]:focus, input[type="text"]:focus {
+      z-index: 1;
+    }
+    .form-control:focus {
+      border-color: #aa7ff5;
+      box-shadow: 0 0 0 0.2rem rgba(170, 127, 245, 1);
+    }
+    form:invalid button[type="submit"], form:invalid input[type="submit"] {
+      opacity: 0.5;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+
+<div id="card" class="card shadow-sm" style="max-width: 350px; left:50%;top:20%; transform: translateX(-50%); display: none"  >
+  <div class="card-body text-center" data-bind="visible: user" >
+    <img data-bind="attr: { src: user.picture.large, alt: user.name.last }" class="img-thumbnail rounded-circle">
+    <div  class="fs-3 text-nowrap  text-muted">
+      <span data-bind="text: user.name.title"></span>
+      <span data-bind="text: user.name.first"></span>
+      <span data-bind="text: user.name.last"></span>
+    </div>
+    <hr>
+    <div class="fs-6 text-muted" data-bind="text: user.email"></div>
+    <footer>
+      <a href="/home.html" class="btn btn-secondary mt-4 ">Enter</a>
+    </footer>
+  </div>
+  <div class="card-body text-center" data-bind="hidden: user" >
+    <img src="./assets/images/log_navy.png" style="width: 100px" alt="logo">
+    <form class="d-flex flex-column justify-content-center align-items-center my-3">
+      <label for="lblLogin"></label>
+      <input id="lblLogin" type="text" name="login" class="form-control" placeholder="Login" required="required" style="border-bottom-left-radius: 0;border-bottom-right-radius: 0;" autocomplete="off" />
+      <label for="lblPassword"></label>
+      <input id="lblPassword" type="password" name="password" class="form-control" placeholder="Password" style="border-top: none; border-top-left-radius: 0;border-top-right-radius: 0;" required="required"  />
+      <span data-bind="visible: loader" class="mt-3 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <input type="submit"  data-bind="hidden: loader" class="mt-3 btn btn-secondary btn-sm btn-block" />
+    </form>
+  </div>
+</div>
+</body>
+<script type="application/javascript">
+  function  MyViewModel() {
+    var self = this;
+    self.loader = ko.observable(false);
+    if(localStorage.getItem('user')){
+      self.user=JSON.parse(localStorage.getItem('user'))
+    }
+    this.submit = async function(e) {
+      e.preventDefault();
+      const form =e.target;
+      self.loader(true)
+      const resp = await fetch('http://localhost:4000/api/0-auth',{ method : 'POST', headers: {
+          'Accept': 'application/json',
+        },  body : JSON.stringify({ login : form.login.value, password: form.password.value})})
+      const datas = await resp.json()
+      localStorage.setItem('user',JSON.stringify(datas.results[0]) )
+      self.loader(false)
+    }
+  }
+  const appModel = new MyViewModel()
+  ko.applyBindings(appModel);
+
+  window.addEventListener('load', async function (e) {
+    document.getElementById('card').style.display = 'block'
+    document.querySelector('form').addEventListener('submit',appModel.submit)
+  })
+</script>
+</html>

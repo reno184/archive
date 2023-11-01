@@ -1,0 +1,49 @@
+<div [formGroup]="rootGroup" style="width: 700px;display: flex;padding: 10px; margin-top: 20px">
+    <div style="flex:1;padding-right: 5px">
+        <div style="display: grid; grid-template-columns: 4fr 6fr;grid-auto-rows:25px;grid-row-gap: 10px">
+            <label [ngClass]="{'text-danger': rootGroup.get('mission-name').hasError('required') }" for="iName" style="margin-right: 5px;vertical-align: middle"><strong>*</strong>Nom mission</label>
+            <input formControlName="mission-name" id="iName" type="text"/>
+            <label for="iMode" style="margin-right: 5px;vertical-align: middle">Mode <small>(Par défault)</small></label>
+            <select formControlName="mission-mode" id="iMode">
+                <option *ngFor="let foMode of (staticDatas.objects['fo-mode'] | keyvalue)" [selected]="foMode.key == rootGroup.get('mission-mode').value" value="{{foMode.key}}">{{ foMode.value.lib | titlecase }}</option>
+            </select>
+        </div>
+        <div class="border" style="border-bottom: solid 1px transparent;margin: 20px 0">
+            <strong>Les PCI</strong>
+        </div>
+       <div *ngFor="let pci of pciArray.controls; let iPci=index" formArrayName="pci-list" style="margin-bottom: 10px">
+           <div formGroupName="{{iPci}}" style="display: grid;grid-template-columns: 1fr 1fr 0 3fr;grid-auto-rows:25px">
+                <span style="align-self: center">{{pci.value['pci-name']}}</span>
+                <div style="align-self: center"><input formControlName="pci-actif" id="{{iPci}}Actif" type="checkbox">
+                    <label for="{{iPci}}Actif">Actif</label>
+                </div>
+                <label for="{{iPci}}mode"></label>
+                <select formControlName="pci-mode" id="{{iPci}}mode">
+                    <option *ngFor="let pciMode of  (staticDatas.objects.pciMode | keyvalue)" [selected]="pciMode.key == pci.value['pci-mode']" value="{{pciMode.key}}">{{  pciMode.value.lib  | titlecase }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div formGroupName="kill-info" style="padding-left: 20px; flex:1">
+        <!-- kill -->
+        <div class="border" style="border-bottom: solid 1px transparent;margin-bottom: 20px">
+                <strong>Kill</strong>
+        </div>
+        <div style="margin-bottom: 10px">
+            <input formControlName="kill-auto" id="ikillAuto" style="justify-content: center;margin-right: 10px" type="checkbox">
+            <label for="ikillAuto">Kill désactivation automatique</label>
+        </div>
+        <div style="margin-bottom: 10px">
+            <input formControlName="msg-lvc16" id="ikillMsgLvc16" style="justify-content: center;margin-right: 10px" type="checkbox">
+            <label for="ikillMsgLvc16">Envoi message au lVC16</label>
+        </div>
+        <div style="margin-bottom: 10px">
+            <input formControlName="kill-external" id="ikillExt" style="justify-content: center;margin-right: 10px" type="checkbox">
+            <label for="ikillExt">Externe (IFF mode 1)</label>
+        </div>
+        <div>
+            <input formControlName="kill-internal" id="ikillInternal" style="justify-content: center;margin-right: 10px" type="checkbox">
+            <label for="ikillInternal">Interne (FO)</label>
+        </div>
+    </div>
+</div>

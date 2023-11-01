@@ -1,0 +1,17 @@
+<app-elevation-scale></app-elevation-scale>
+<div class="border border-white bg bg-grey" style="position:absolute;bottom:0; width: 100%; z-index: 1;height: 30px; border-top: solid 1px transparent; box-shadow: -3px -3px 3px rgba(0,0,0,.6);">
+    <div style="display: flex;line-height: 30px">
+        <div class="text-white" style="flex: 1;">
+        <span style="margin: 0 20px">{{ appInitService.configDatas.logo }}</span>
+        <small style="margin-right: 5px">{{staticDatas.objects['unit-latlng'][(latlngUnit$ | async)].lat((result$ | async).lat)}}</small>
+        |
+         <small style="margin-right: 5px">{{staticDatas.objects['unit-latlng'][(latlngUnit$ | async)].lng((result$ | async).lng)}}</small>
+        </div>
+        <div class="text-white">
+        <span style="margin: 0 20px">{{timer |  date:'hh.mm:ss'   }}</span>
+        <span>{{ appInitService.configDatas.version }}</span>
+        </div>
+    </div>
+</div>
+
+

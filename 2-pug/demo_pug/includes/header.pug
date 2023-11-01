@@ -1,0 +1,17 @@
+block var
+doctype html
+html(lang="fr" class="rhe")
+    head
+        block head
+            meta(charset='utf-8')
+            meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+            link(rel="stylesheet" href="/css/bootstrap.min.css")
+            if domaine === 'public'
+                link(rel="stylesheet" href="/css/style.css")
+    body
+        if domaine === 'public'
+            include ../public/shared/menu-top
+        else if domaine === 'admin'
+            include ../admin/shared/menu-top
+        block content
+        include ../public/shared/footer

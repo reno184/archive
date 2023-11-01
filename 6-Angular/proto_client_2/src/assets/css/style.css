@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Mono&display=swap');
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-size: 100%;
+    font-family: 'PT Mono', monospace;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+.custom-font {
+    font-size: 300%;
+    font-family: 'Dancing Script', cursive
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.border_grey_1 {
+    border-color: #aaa;
+}
+
+.box_shadow {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+}
+
+.day {
+    background: #fffde3 url("../img/billie-holiday.png");
+}
+
+.title {
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
+}
+.text-danger{
+    color : #cc0000
+}

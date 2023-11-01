@@ -1,0 +1,46 @@
+extends ../../includes/header
+include ../../includes/mixins
+block var
+    - title = 'Article détail'
+    - view = "article-detail"
+    - domaine = "admin"
+
+block append head
+    script(defer src="/__/firebase/6.0.2/firebase-app.js")
+    script(defer src="/__/firebase/6.0.2/firebase-auth.js")
+    script(defer src="/__/firebase/6.0.2/firebase-storage.js")
+    script(defer src="/__/firebase/init.js")
+    script(src="/js/lib/jquery-3.3.1.slim.min.js")
+    script(src='/js/lib/popper.min.js')
+    script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/helpers.js')
+    script
+        include article-detail.js
+
+block content
+    div.row.my-4
+        div.col-sm-12.offset-md-3.col-md-6
+            form.card.shadow-sm
+                div.card-header Inspiration
+                div.card-body
+                    div.form-group
+                        label.d-none.d-sm-block=libelle
+                        input.form-control.mb-2.mr-sm-2(type="text" name="lib" value="test lib")
+                    div.form-group
+                        label(for="txtDescription") Example textarea
+                        textarea.form-control(id="txtDescription" rows="3" name="desc" value="test desc")
+                    div.form-group
+                        .input-group.my-3
+                            .custom-file
+                                input#btnGetFile.custom-file-input(type="file")
+                                label.custom-file-label(for="btnGetFile" aria-describedby="inputGroupFileAddon02") Choose file...
+                        .input-group-append
+                            span#btnUploadFile.input-group-text Upload
+                footer.d-flex.justify-content-around.card-footer
+                    a.btn.btn-outline-primary(href="/admin/article-list", role="button") Retour
+                    input.btn.btn-primary(type="submit")
+            div.alert.alert-danger.my-3.border.border-dark Erreure fdkfjlsdjfs
+
+        //.progress
+            #uploader.progress-bar.bg-success(role="progressbar"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100")
+        //div#imgContainer

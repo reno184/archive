@@ -1,0 +1,48 @@
+extends ../../includes/header
+block var
+    - title = 'Contact'
+    - view = "contact"
+    - domaine = "public"
+
+block content
+
+  div#recaptcha.g-recaptcha(data-size="invisible")
+  div.row-fluid.mb-3
+  div.card.shadow
+    div.card
+      div.card-body
+        form(action="/contact",method="POST")
+          h5.card-title Contact
+          div.form-row
+            div.col-md-4.mb-3
+              +input('Votre nom')(type="text",name="name")
+            div.col-md-4.mb-3
+              +input('Votre email')(type="mail",name="mail",value="renoaide184@yahoo.fr")
+            div.col-md-4.mb-3
+              +input('Votre téléphone')(type="text",name="tel")
+          h5.card-title Café/Restaurant
+          div.form-row
+            div.col-md-4.mb-3
+              +input('Nom/Dénomination sociale')(type="text",name="denomination")
+            div.col-md-4.mb-3
+              +input('Siret')(type="text",name="siret")
+          div.form-row
+            div.col-md-8
+              div.form-group
+                label(for="comment")
+                    h5 Message* :
+                textarea#comment.form-control(rows="5",name="message",required=true)
+          div.form-row
+            div.col-sm-12.text-center
+              input.btn.btn-success.btn-sm(type="submit")
+        p.mt-3.text-center
+          small
+            |Vous pouvez aussi nous contacter à l'adresse suivante : 
+            a(href="mailto:#") contact@ultramamba.com
+
+
+
+        
+
+
+

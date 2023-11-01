@@ -1,0 +1,44 @@
+<div *ngIf="getUser() === 'PPSRM'; then pnlPpsrm; else pnlPci"></div>
+<ng-template #pnlPpsrm>
+
+        <div *ngIf="
+                (pciArray$ | async).length > 0;
+                then dataBlock;
+                else noDataBlock
+            "></div>
+        <ng-template #noDataBlock>
+            <small class="text-primary">Pas de donnée..</small>
+        </ng-template>
+        <ng-template #dataBlock>
+            <div *ngIf="
+                    allEmissionStatus$ | async;
+                    then emissionRunning;
+                    else emissionStopped
+                "></div>
+            <ng-template #emissionRunning>
+                <ul>
+                    <li class="menu-item border-color" style="padding: 0 5px; border-bottom: solid 1px transparent">
+                        <a (click)="stopAll()" class="link" title="{{ labelPlaystop.stop.title }}">
+                            <i class="far fa-stop-circle text-primary" style="margin-right: 5px"></i>
+                            <span>{{ labelPlaystop.tous.lib }}</span>
+                        </a>
+                    </li>
+                    <li *ngFor="let r of pciArray$ | async; let i = index" class="menu-item" style="padding: 0 5px">
+                        <a (click)="stopRow(r.pci_id)" *ngIf="r.mission === 1" class="link" title="{{ labelPlaystop.stop.title }}"><i class="far fa-stop-circle text-primary" style="margin-right: 5px"></i><span>{{ r.name }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </ng-template>
+            <ng-template #emissionStopped>
+                <div class="text-danger js-emission-status">
+                    <span>
+                        <i class="far fa-stop-circle"></i>Tous les PCI stoppés
+                    </span>
+                </div>
+            </ng-template>
+        </ng-template>
+
+</ng-template>
+<ng-template #pnlPci>
+    <h1>pci</h1>
+</ng-template>

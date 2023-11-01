@@ -1,0 +1,24 @@
+extends ../../includes/header
+
+block var
+    - title = 'Article list'
+    - view = "article-list"
+    - domaine = "admin"
+
+block append head
+    script(defer src="/__/firebase/6.0.2/firebase-app.js")
+    script(defer src="/__/firebase/6.0.2/firebase-firestore.js")
+    script(defer src="/__/firebase/init.js")
+    script(src="/js/lib/jquery-3.3.1.slim.min.js")
+    script(src='/js/lib/popper.min.js')
+    script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/helpers.js')
+    script
+        include article-list.js
+
+block content
+    div.container
+        div.row
+            div.col-12.text-center
+                a.btn.btn-primary.my-3(href="/admin/article-detail" role="button") Ajouter
+        div#elts.row

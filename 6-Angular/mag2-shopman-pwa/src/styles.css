@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Consolas, monaco, monospace;
+    background: #fffde3 url("./assets/images/texture.png");
+}
+
+.form-control:focus {
+    border-color: #aa7ff5;
+    box-shadow: 0 0 0 0.2rem rgba(170, 127, 245, 1);
+}
+
+form:invalid button[type="submit"], form:invalid input[type="submit"] {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.menu-left {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+    background: #fff;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+}

@@ -1,0 +1,25 @@
+<div class="root" style="overflow: hidden;position: absolute;  display: flex;  flex-direction: column;  height: 100vh;  width: 100vw; z-index: 0">
+    <header style="position: relative;  width: 100vw">
+        <app-nav-top></app-nav-top>
+    </header>
+    <main style="  flex: 1;  z-index: 0">
+        <app-main-map></app-main-map>
+    </main>
+    <footer style="position: relative;  width: 100vw">
+        <app-bar-bottom></app-bar-bottom>
+    </footer>
+    <app-menu-right></app-menu-right>
+</div>
+<section>
+    <router-outlet></router-outlet>
+    <router-outlet name="front"></router-outlet>
+</section>
+<ng-container *ngIf="msgError$  | async">
+    <div style="position: absolute;z-index:1;display: flex; justify-content: center; align-items: center; height: 100vh;  width: 100vw; background: rgba(153,0,0,.2)">
+    <div class="alert alert-danger" style="text-align: center;padding: 20px 40px">
+        {{(msgError$ | async).message}}<br>
+        <a href="/" style="margin-top: 20px;display: inline-block">Fermer</a>
+    </div>
+</div>
+</ng-container>
+

@@ -1,0 +1,19 @@
+{
+  "LBL_TITLE": "Name",
+  "LBL_COLOR": "Couleur",
+  "LBL_STATUS": "Active",
+  "LBL_MODE": "Mode",
+  "LBL_FREQ": "Freq",
+  "LBL_LI": "L.I",
+  "LBL_PRI": "P.R.I",
+  "LBL_RT": "R.T",
+  "LBL_ATTEN": "Atténuation",
+  "LBL_CLASS": "Classe",
+  "LBL_MAX_TARGET": "Max cible",
+  "LBL_KILL_STATUS": "Kill status",
+  "LBL_KILL": "Kill",
+  "LBL_ALT_MIN": "Alt min",
+  "LBL_ALT_MAX": "Alt max",
+  "LBL_RAD_MIN": "Rad min",
+  "LBL_RAD_MAX": "Rad max"
+}

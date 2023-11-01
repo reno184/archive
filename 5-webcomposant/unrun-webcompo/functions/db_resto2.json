@@ -1,0 +1,155 @@
+{
+  "g": [
+    {
+      "id": "A0RjHxXdIcEbRViSvwmD",
+      "libelle": "La carte des boissons",
+      "rank": 0,
+      "blockList": [
+        {
+          "id": "0aUr916u7I1HaF60Dsk2",
+          "libelle": "Apéritifs sans alcool",
+          "rank": 0,
+          "articleList": [
+            {
+              "id": "1557753901728",
+              "libelle": "Cocktail de jus de fruits (sans alcool)",
+              "rank": 0,
+              "price": 3.7
+            },
+            {
+              "id": "1557753923481",
+              "libelle": "Cocktail Passion (sans alcool)",
+              "rank": 0,
+              "price": 3.4
+            }
+          ]
+        },
+        {
+          "id": "FZ8OUKNTNx9RFVeKAoKy",
+          "libelle": "Eaux et boissons",
+          "rank": 0,
+          "articleList": [
+            {
+              "id": "1556115950454",
+              "libelle": "Perrier",
+              "rank": 0,
+              "price": 3.2
+            },
+            {
+              "id": "1556115991995",
+              "libelle": "Eau gazeuse Evian",
+              "rank": 0,
+              "price": 3.15
+            },
+            {
+              "id": "1557502429092",
+              "libelle": "Orangina, Coca, coca-light, Sprite",
+              "rank": 0,
+              "price": 3.4
+            },
+            {
+              "id": "73VEwrkOd1Sdbyoo45U1",
+              "libelle": "Jus de fruits Pago",
+              "rank": 0,
+              "price": 3.4
+            },
+            {
+              "id": "7hlety37GqE9R0ardZxs",
+              "libelle": "Sirop",
+              "rank": 0,
+              "price": 2.45
+            }
+          ]
+        },
+        {
+          "id": "IAu5QzC4QSOspV1FQltM",
+          "libelle": "Champagne",
+          "rank": 0,
+          "articleList": [
+            {
+              "id": "l3VMXwLwy4CgyRNVk9LG",
+              "libelle": "Coupe de champagne",
+              "rank": 0,
+              "price": 5.6
+            },
+            {
+              "id": "yw4Qq9nEuHa3Yx8l2qEp",
+              "libelle": "Bouteille champagne",
+              "rank": 0,
+              "price": 34
+            }
+          ]
+        },
+        {
+          "id": "PHuMJwGGtf41nm7jwWu8",
+          "libelle": "Boissons chaudes",
+          "rank": 0,
+          "articleList": [
+            {
+              "id": "1556115360385",
+              "libelle": "Café ou décaféiné",
+              "rank": 0,
+              "price": 1.8,
+              "questionList": [
+                {
+                  "id": "ScBnyoDgrYCiZfeQ4vTf",
+                  "libelle": "Votre préférence ?",
+                  "reponseList": [
+                    {
+                      "id": "0LOTcuUS5lbPo90AL7NE",
+                      "libelle": "Bleu",
+                      "price": 0,
+                      "rank": 0
+                    },
+                    {
+                      "id": "OWDfPRqFoRMgtfIVwMrK",
+                      "libelle": "Saignant",
+                      "price": 0,
+                      "rank": 1
+                    },
+                    {
+                      "id": "QKflRr7DLBJxDzY8zLTk",
+                      "libelle": "A point",
+                      "price": 0,
+                      "rank": 2
+                    },
+                    {
+                      "id": "anW2h2Z06Lix8HmYI8QL",
+                      "libelle": "Cuit",
+                      "price": 0,
+                      "rank": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "1556116038458",
+              "libelle": "Café gourmand",
+              "rank": 0,
+              "price": 6.9
+            },
+            {
+              "id": "1556116068035",
+              "libelle": "Thé/Infusion",
+              "rank": 0,
+              "price": 2.5
+            },
+            {
+              "id": "1557499544992",
+              "libelle": "Capuccino",
+              "rank": 0,
+              "price": 2.6
+            },
+            {
+              "id": "1557499723224",
+              "libelle": "Grand crème",
+              "rank": 0,
+              "price": 2.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

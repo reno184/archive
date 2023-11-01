@@ -1,0 +1,17 @@
+{
+    "jre_cnx": {
+        "lib": "Cnx"
+    },
+    "jre_rtc": {
+        "lib": "RTC"
+    },
+    "jre_lat": {
+        "lib": "JRE lat"
+    },
+    "com_lat": {
+        "lib": "Com lat"
+    },
+    "clock_shift": {
+        "lib": "Clock shift"
+    }
+}

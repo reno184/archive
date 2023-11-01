@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map Layer</title>
+    <link rel="stylesheet" href="./node_modules/leaflet/dist/leaflet.css"/>
+    <script src="./node_modules/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="./assets/css/lib/fontawesome.min.css">
+    <link rel="stylesheet" href="./assets/css/lib/regular.min.css">
+     <link rel="stylesheet" href="./assets/css/lib/solid.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./node_modules/d3/dist/d3.min.js"></script>
+    <script src="./node_modules/d3-interpolate-path/build/d3-interpolate-path.min.js"></script>
+    <script src="./node_modules/underscore/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
+    <script src="./assets/js/app.js" type="module" defer ></script>
+</head>
+<body>
+<section style="position: fixed;height: 0; visibility: hidden">
+    <svg-gradient class="svg-gradient"></svg-gradient>
+</section>
+
+<div class="root">
+  <header>
+      <menu-top class="menu-top"></menu-top>
+  </header>
+<main>
+    <map-layer class="map-layer"></map-layer>
+
+</main>
+    <footer>
+        <nav-bottom class="menu-bottom" ></nav-bottom>
+    </footer>
+</div>
+<aside>
+    <menu-right class="menu-right"></menu-right>
+</aside>
+<section>
+    <context-menu class="context-menu"></context-menu>
+</section>
+
+</body>
+</html>

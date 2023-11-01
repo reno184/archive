@@ -1,0 +1,148 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../Ubuntu/Ubuntu-Medium.ttf") format("truetype");
+}
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.font-ubuntu {
+  font-family: "Ubuntu", sans-serif;
+}
+
+/* BEGIN SMACSS BASE */
+body {
+  margin: 0;
+  font-family: Gill Sans Extrabold, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* END SMACSS BASE */
+/* BEGIN SMACSS LAYOUT */
+body > div.root {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+}
+
+body > div > header, body > div > footer {
+  position: relative;
+  width: 100vw;
+}
+
+body > div > main {
+  flex: 1;
+  z-index: 0;
+}
+
+body > aside {
+  top: 0;
+  right: 0;
+  position: fixed;
+  z-index: 999;
+  height: 100vh;
+}
+
+/* END SMACSS LAYOUT */
+/* BEGIN SMACSS MODULE */
+/* Custom dropdown */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown select {
+  font-size: inherit;
+  width: 100px;
+  padding: 0.3em;
+  padding-right: 2.5em;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: "";
+  -webkit-appearance: button;
+}
+
+.custom-dropdown::before,
+.custom-dropdown::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.custom-dropdown::after {
+  content: "▼";
+  height: 1em;
+  font-size: 0.625em;
+  line-height: 1;
+  right: 1.2em;
+  top: 50%;
+  margin-top: -0.5em;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown::before {
+  width: 2em;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.custom-dropdown select[disabled] {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown select[disabled]::after {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown::before {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.custom-dropdown::after {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.form-control {
+  font-weight: 400;
+  line-height: 1.5;
+  border: solid 1px lightgray;
+  border-radius: 4px;
+  padding: 2px 5px;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.btn {
+  font-weight: 400;
+  line-height: 1.5;
+  border: solid 1px lightgray;
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+/* END SMACSS MODULE */
+
+/*# sourceMappingURL=style.css.map */

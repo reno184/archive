@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "dist",
+    "target" : "mambatest_alias",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

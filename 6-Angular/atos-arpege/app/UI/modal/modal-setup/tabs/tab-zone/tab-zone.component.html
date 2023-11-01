@@ -1,0 +1,82 @@
+<div [formGroup]="formGroup">
+    <ul class="tab">
+        <li>
+            <a queryParamsHandling="preserve" routerLink="../interdit" routerLinkActive="active">Zones inhibées</a>
+        </li>
+        <li>
+            <a queryParamsHandling="preserve" routerLink="../interet" routerLinkActive="active">Zones d'intérêt</a>
+        </li>
+        <li>
+            <a queryParamsHandling="preserve" routerLink="../point" routerLinkActive="active">Points</a>
+        </li>
+    </ul>
+    <!--    <pre><small>{{formGroup.get('geo-attached').value | json}}</small></pre>-->
+    <div style="display: flex;">
+    <div style="min-height: 300px; min-width: 150px ;border: solid 1px #ddd;border-radius: 4px;display: flex;flex-direction: column">
+        <header class="border" style="text-align: center;padding: 10px 0;border-bottom: solid 1px transparent">
+            <small>Liste
+            <ng-container *ngIf="(params$ | async)['type'] === 'point' ">
+                Point
+            </ng-container>
+            <ng-container *ngIf="(params$ | async)['type'] !== 'point' ">
+                Zone
+                <ng-container *ngIf="(params$ | async)['type'] === 'interet' ">
+                d'intérêt
+                </ng-container>
+                <ng-container *ngIf="(params$ | async)['type'] === 'interdit' ">
+                interdit
+                </ng-container>
+            </ng-container>
+            </small>
+        </header>
+        <main style="flex: 1;">
+            <div *ngIf="(loading$ | async) === true || (geoElements$ | async).length === 0" class="test-loading" style="height: 200px; display: flex;align-items: center;justify-content: center">
+            <i *ngIf="(loading$ | async) === true" class="far fa-spinner fa-spin fa-2x"></i>
+            <p *ngIf="(loading$ | async) === false && (geoElements$ | async).length === 0" style="text-align: center">
+            <i class="far fa-box-open fa-2x"></i>
+            <br>
+            <span>Pas de donnée</span>
+            </p>
+            </div>
+            <ul *ngIf="(loading$ | async) === false && (geoElements$ | async).length > 0">
+                <li *ngFor="let geoElement of (geoElements$ | async) ; let i = index" class="border" style="display:flex; padding: 10px; border-bottom: solid 1px transparent">
+                    <span style="flex:1">{{ geoElement['marker-title'] }}</span>
+                    <a (click)="renderLeafletSVG(geoElement)" style="margin-right: 5px"><i class="far fa-map-marker"></i></a>
+                    <a (click)="onAttachZone(geoElement.id)" title="Attach">
+                    <i class="far fa-plus-circle"></i>
+                    </a>
+                </li>
+            </ul>
+        </main>
+        <footer style="text-align: center;padding: 10px 0">
+               <a [queryParams]="{ 'marker-type' : (params$| async)['type'] }" [routerLink]="['', { outlets: { front: ['front', 'geo', 'detail'] } }]" class="link"><i class="far fa-plus-square" style="margin-right: 5px"></i>Nouveau</a>
+        </footer>
+    </div>
+    <div style="display: flex;align-items:center;justify-content: center;width: 40px">
+    <i class="far fa-exchange"></i>
+    </div>
+    <div formArrayName="geo-attached" style="min-height: 300px; min-width: 150px ;border: solid 1px #ddd;border-radius: 4px;display: flex;flex-direction: column">
+        <header class="border" style="text-align: center;padding: 10px 0;border-bottom: solid 1px transparent">
+            <small>Elements attachés</small>
+        </header>
+
+        <ul *ngFor="let attached of attacheds$|async ; let iAttached=index">
+            <ng-container *ngIf="attached['marker-type'] === (params$| async)['type']">
+                       <li class="border" style="display:flex; padding: 10px; border-bottom: solid 1px transparent">
+                         <span style="flex: 1">{{attached['marker-title']}}</span>
+                         <a (click)="renderLeafletSVG(attached)" style="margin-right: 5px"><i class="far fa-map-marker"></i></a>
+                         <a (click)="onDetachZone(attached.id)" style="margin-left: 5px">
+                             <i class="far fa-times-circle"></i>
+                         </a>
+                 </li>
+            </ng-container>
+        </ul>
+    </div>
+        <div style="display: flex;align-items:center;justify-content: center;width: 40px">
+            <i class="far fa-map"></i>
+        </div>
+        <div style="width: 350px; border-radius: 5px;overflow: hidden;border: solid 1px #aaa">
+             <div id="mapTabZone" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+</div>

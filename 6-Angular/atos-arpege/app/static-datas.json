@@ -1,0 +1,49 @@
+{
+  "labels": {
+    "angle": "angle",
+    "add": "ajout",
+    "altitude": "altitude",
+    "back": "retour",
+    "carte": "carte",
+    "circle": "circle",
+    "distance": "distance",
+    "interet": "intérêt",
+    "fo": "Forme d'onde",
+    "forbidden": "interdit",
+    "from": "de",
+    "name": "nom",
+    "point": "point",
+    "polygon": "polygone",
+    "position": "position",
+    "stop": "arret",
+    "to": "à",
+    "update": "mise à jour",
+    "vitesse": "vitesse",
+    "zone": "zone"
+  },
+  "picker": {
+    "icons": [
+      "fa-bullseye",
+      "fa-bullseye-pointer",
+      "fa-crosshairs",
+      "fa-map-marker-plus",
+      "fa-thumbtack",
+      "fa-map-pin"
+    ]
+  },
+  "dropdownlist": {
+    "pciMode": {
+      "0": "controllé",
+      "1": "autonome"
+    },
+    "foClass": {
+      "0": "veille",
+      "1": "tir",
+      "2": "poursuite"
+    },
+    "styleTrait": {
+      "0": "plein",
+      "1": "pointillé"
+    }
+  }
+}

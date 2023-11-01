@@ -1,0 +1,27 @@
+<div style="display: grid;grid-template-columns: 1fr 3fr;grid-auto-rows:25px;grid-row-gap: 5px;grid-column-gap: 5px">
+    <label for="crtlDistance" style="align-self: center;text-align: end">{{appInitService.staticDatas.labels.distance}}</label>
+    <select (change)="changeDistance($event)" class="customSelect" id="crtlDistance">
+    <option *ngFor="let unitDistance of staticDatas.objects['unit-distance'] | keyvalue" [value]="unitDistance.key">{{ unitDistance.value.lib}}</option>
+    </select>
+    <label for="crtlAngles" style="align-self: center;text-align: end">{{appInitService.staticDatas.labels.angle}}</label>
+    <select (change)="changeDegrees($event)" class="customSelect" id="crtlAngles">
+    <option *ngFor="let degree of staticDatas.objects['unit-degree'] | keyvalue" [value]="degree.key">{{ degree.value.lib }}</option>
+    </select>
+    <label for="crtlPosition" style="align-self: center;text-align: end">{{appInitService.staticDatas.labels.position}}</label>
+    <select (change)="changeLatLng($event)" class="customSelect" id="crtlPosition">
+    <option *ngFor="let latlng of staticDatas.objects['unit-latlng'] | keyvalue" [value]="latlng.key">{{ latlng.value.lib}}</option>
+    </select>
+    <label for="crtlAltitude" style="align-self: center;text-align: end">{{appInitService.staticDatas.labels.altitude}}</label>
+    <select (change)="changeAltitude($event)" class="customSelect" id="crtlAltitude">
+    <option *ngFor="let altitude of staticDatas.objects['unit-altitude'] | keyvalue" [value]="altitude.key">{{ altitude.value.lib }}</option>
+    </select>
+    <label for="crtlSpeed" style="align-self: center;text-align: end">{{appInitService.staticDatas.labels.vitesse}}</label>
+    <select (change)="changeSpeed($event)" class="customSelect" id="crtlSpeed">
+    <option *ngFor="let speed of staticDatas.objects['unit-speed'] | keyvalue" [value]="speed.key">{{speed.value.lib}}</option>
+    </select>
+    <label for="crtlCarte" style="align-self: center;text-align: end">{{appInitService.staticDatas.labels.carte}}</label>
+    <select (change)="changeCarte($event)" class="customSelect" id="crtlCarte">
+    <option *ngFor="let type of staticDatas.objects['type-carte'] | keyvalue" [value]="type.key">{{type.value.lib}}</option>
+    </select>
+</div>
+

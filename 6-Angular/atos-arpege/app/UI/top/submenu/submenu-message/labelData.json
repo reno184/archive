@@ -1,0 +1,17 @@
+{
+    "allread": {
+        "lib": "Tous comme lu",
+        "title": "Marquer tous comme lu"
+    },
+    "log": {
+        "lib": "Les log",
+        "title": "Ouvrir le panneau des logs"
+    },
+    "itemread": {
+        "lib": "Item lu",
+        "title": "Marquer message comme lu"
+    },
+    "nodata": {
+        "lib": "Pas de message"
+    }
+}

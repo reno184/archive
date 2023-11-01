@@ -1,0 +1,27 @@
+/* BEGIN SMACSS LAYOUT */
+body > div.root
+    position: absolute
+    display: flex
+    flex-direction: column
+    height: 100vh
+    width: 100vw
+    z-index: 0
+
+body > div > header, body > div > footer
+    position: relative
+    width: 100vw
+
+body > div > main
+    flex: 1
+    z-index: 0
+
+body  > aside
+    top: 0
+    right: 0
+    position: fixed
+    z-index: 999
+    height: 100vh
+
+
+
+/* END SMACSS LAYOUT */

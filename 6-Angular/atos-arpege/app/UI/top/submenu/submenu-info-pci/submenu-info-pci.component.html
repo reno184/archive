@@ -1,0 +1,82 @@
+<div *ngIf="getUser() === 'PPSRM'; then pnlPpsrm; else pnlPci"></div>
+<ng-template #pnlPpsrm>
+    <div>
+            <div *ngIf="
+                    (pciArray$ | async).length > 0;
+                    then dataBlock;
+                    else noDataBlock
+                "></div>
+            <ng-template #noDataBlock>
+                <ul>
+                <li>
+                    <small class="text-danger">Pas de donnée...</small>
+                </li>
+                </ul>
+
+            </ng-template>
+            <ng-template #dataBlock>
+                <li *ngFor="let r of pciArray$ | async; let i = index" class="menu-item border-color" style="padding: 0 5px; border-bottom: solid 1px transparent">
+                    <a (click)="tooglePCI(i)" [ngClass]="{ active: i === index }" class="arrow_downup" style="display: flex;align-items: center" title="{{ staticDatas.labels.toggle }}">
+                        <span style="flex: 1">{{ r.name }}</span><i class="far fa-chevron-circle-down"></i></a>
+                    <ul [ngClass]="{ active: i === index }" class="content_downup">
+                        <ng-container *ngIf="r.status === pciStatusType.CONNECTED">
+                            <li *ngIf="r.position !== undefined">
+                                <strong style="margin-right: 5px">{{ staticDatas.labels.lat| titlecase}}:</strong>
+                                   <span>{{staticDatas.objects['unit-latlng'][(latlng$ | async)].lat(r.position.lat)}}</span>
+                            </li>
+                            <li *ngIf="r.position !== undefined">
+                                <strong style="margin-right: 5px">{{ staticDatas.labels.lng | titlecase}}:</strong>
+                                <span>{{staticDatas.objects['unit-latlng'][(latlng$ | async)].lng(r.position.lng)}}</span>
+                            </li>
+                            <li *ngIf="r.altitude !== undefined">
+                                <strong style="margin-right: 5px">{{ constantes.labels.alt | titlecase}}:</strong>
+                                <span>{{r.altitude / staticDatas.objects['unit-altitude'][(unitAltitude$ |async)].coef | number : '1.0-2'}} </span>
+                                <span>{{staticDatas.objects['unit-altitude'][(unitAltitude$ |async)].lib}}</span>
+                            </li>
+                            <li *ngIf="r.azimut !== undefined">
+                                <strong style="margin-right: 5px">{{ constantes.labels.azimut | titlecase }}:</strong><span>{{r.azimut}}</span>
+                            </li>
+                            <li *ngIf="r.position !== undefined" style="display: flex; text-align: center">
+                                <a class="text-primary" title="{{ constantes.labels.takeit }}"><i class="far fa-map-pin" style="margin-right: 5px"></i><i>{{ constantes.labels.takeit  | titlecase }}</i></a>
+                            </li>
+                            <li style="display: flex; text-align: center">
+                                <a class="text-primary" title="{{ constantes.labels.flyto }}"><i class="far fa-joystick" style="margin-right: 5px"></i><i>{{ constantes.labels.flyto  | titlecase }}</i></a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="r.status === pciStatusType.DISCONNECTED">
+                            <li>
+                                <strong style="margin-right: 5px">{{ constantes.labels.disconnected }}</strong>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </li>
+            </ng-template>
+
+    </div>
+</ng-template>
+<ng-template #pnlPci>
+    <div class="accordion">
+        <ul>
+            <li>
+                <a class="active"><span>PCI 1</span></a>
+                <ul class="active">
+                    <li>
+                        <a><strong>Alt</strong><span>2.05m</span></a>
+                    </li>
+                    <li>
+                        <a><strong>Lat</strong><span>76.45.45.dd</span></a>
+                    </li>
+                    <li>
+                        <a><strong>Alt</strong><span>2.05m</span></a>
+                    </li>
+                    <li>
+                        <a><strong>Lat</strong><span>76.45.45.dd</span></a>
+                    </li>
+                    <li>
+                        <a><i class="far fa-map-pin"></i><i>Centrer sur la carte</i></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</ng-template>

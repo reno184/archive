@@ -1,0 +1,37 @@
+<div *ngIf="getUser() === 'PPSRM'; then pnlPpsrm; else pnlPci"></div>
+<ng-template #pnlPpsrm>
+    <div>
+
+            <div *ngIf="
+                    (pciArray$ | async).length > 0;
+                    then dataBlock;
+                    else noDataBlock
+                "></div>
+            <ng-template #noDataBlock>
+                <ul>
+                       <li>
+                    <small class="text-danger">Pas de donnée...</small>
+                </li>
+                </ul>
+
+            </ng-template>
+            <ng-template #dataBlock>
+                <li *ngFor="let r of pciArray$ | async; let i = index" class="menu-item border-color" style="padding: 0 5px;border-bottom: solid 1px transparent">
+                    <a (click)="tooglePCI(i)" [ngClass]="{ active: index === i }" class="arrow_downup" style="display: flex; align-items: center">
+                        <span style="flex: 1">{{ r.name }}</span>
+                        <i class="far fa-chevron-circle-down "></i>
+                    </a>
+                    <ul [ngClass]="{ active: index === i }" class="content_downup">
+                        <li>
+                    <!--        <i class="far fa-circle-notch {{getColorIcon(r.wifiState)}}" style="margin-right: 5px"></i>
+                            <span> {{getTextIcon(r.wifiState)}}</span>-->
+                        </li>
+                    </ul>
+                </li>
+            </ng-template>
+
+    </div>
+</ng-template>
+<ng-template #pnlPci>
+    <h1>Pci</h1>
+</ng-template>

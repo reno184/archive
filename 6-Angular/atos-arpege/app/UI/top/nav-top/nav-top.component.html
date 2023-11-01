@@ -1,0 +1,106 @@
+<a [ngClass]="{ 'is-open': routeParamsMenuTop$ | async }" class="menu-top-backdrop" routerLink="/"></a>
+<ul class="bg bg-grey border border-white" style="position: relative;z-index: 3; box-shadow: 0 2px 4px rgba(0, 0, 0, .6);display: flex;border-bottom: solid 1px transparent">
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;padding:10px 30px;">
+        <a class="text-shadow" routerLink="/modal/menu" title="{{ staticDatas.objects.menuTop.modalmenu.lib }}">
+            <i class="far {{staticDatas.objects.menuTop.modalmenu.icon}}" style="margin-right: 5px"></i>{{ staticDatas.objects.menuTop.modalmenu.lib }}
+        </a>
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;">
+        <a [queryParams]="{'menu-top' :  staticDatas.objects.menuTop.network.key}" routerLink="/" style="display: inline-block;flex: 1;padding: 7px" title="{{  staticDatas.objects.menuTop.modalmenu.lib  }}">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x text-shadow"></i>
+                <i class="far {{ staticDatas.objects.menuTop.network.icon }}  fa-stack-1x {{getColorIcon(network$ | async)}}"></i>
+            </span>
+            <span class="text-shadow">{{ staticDatas.objects.menuTop.network.lib }}</span>
+        </a>
+        <div style="position:relative">
+        <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) ===  staticDatas.objects.menuTop.network.key}" class="submenu  bg bg-grey">
+                <app-submenu-network></app-submenu-network>
+        </div>
+        </div>
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;">
+
+        <a [queryParams]="{'menu-top' :  staticDatas.objects.menuTop.mission.key}" routerLink="/" style="display: inline-block;flex: 1;padding: 7px" title="{{ staticDatas.objects.menuTop.modalmenu.lib }}">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x text-shadow"></i>
+                <i class="far {{ staticDatas.objects.menuTop.mission.icon }}  fa-stack-1x {{getColorIcon(network$ | async)}}"></i>
+            </span>
+            <span class="text-shadow">{{ staticDatas.objects.menuTop.mission.lib }}</span>
+        </a>
+        <div style="position:relative">
+        <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) === staticDatas.objects.menuTop.mission.key}" class="submenu  bg bg-grey" style="padding: 0;min-width: 150px">
+            <app-submenu-mission></app-submenu-mission>
+        </div>
+        </div>
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;">
+        <a [queryParams]="{'menu-top' :  staticDatas.objects.menuTop.info.key}" routerLink="/" style="display: inline-block;flex: 1;padding: 7px" title="{{  staticDatas.objects.menuTop.info.lib }}">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x text-shadow"></i>
+                <i class="far {{  staticDatas.objects.menuTop.info.icon }} fa-stack-1x {{getColorIcon(network$ | async)}}"></i>
+            </span>
+            <span class="text-shadow">{{ staticDatas.objects.menuTop.info.lib }}</span>
+        </a>
+        <div style="position:relative">
+            <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) ===  staticDatas.objects.menuTop.info.key }" class="submenu  bg bg-grey">
+            <app-submenu-info-pci></app-submenu-info-pci>
+        </div>
+        </div>
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;">
+        <a [queryParams]="{'menu-top' : staticDatas.objects.menuTop.payload.key }" routerLink="/" style="display: inline-block;flex: 1;padding: 7px" title="{{  staticDatas.objects.menuTop.payload.lib }}">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x text-shadow"></i>
+                <i class="icon-circle far {{  staticDatas.objects.menuTop.payload.icon  }}  fa-stack-1x {{getColorIcon(network$ | async)}}"></i>
+            </span>
+            <span class="text-shadow">{{  staticDatas.objects.menuTop.payload.lib }}</span>
+        </a>
+        <div style="position:relative">
+           <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) ===  staticDatas.objects.menuTop.payload.key }" class="submenu  bg bg-grey">
+            <app-submenu-payload></app-submenu-payload>
+           </div>
+        </div>
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent; display: flex; flex-direction: column">
+        <a [queryParams]="{'menu-top' :  staticDatas.objects.menuTop.setting.key }" routerLink="/" style="display: inline-block;flex: 1;padding: 7px" title="{{ staticDatas.objects.menuTop.setting.lib }}">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x text-shadow"></i>
+                <i class="far {{staticDatas.objects.menuTop.setting.icon }} fa-stack-1x text-dark"></i></span>
+            <span class="text-shadow">{{ staticDatas.objects.menuTop.setting.lib }}</span>
+        </a>
+        <div style="position:relative">
+              <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) === staticDatas.objects.menuTop.setting.key }" class="submenu bg bg-grey">
+                 <app-submenu-setting></app-submenu-setting>
+                </div>
+        </div>
+
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;">
+        <a [queryParams]="{'menu-top' : staticDatas.objects.menuTop.playstop.key  }" routerLink="/" style="display: inline-block;flex: 1;padding: 7px" title="{{  staticDatas.objects.menuTop.playstop.lib }}">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x text-shadow"></i>
+                <i class="far {{  staticDatas.objects.menuTop.playstop.icon}} fa-stack-1x text-dark "></i>
+            </span>
+            <span class="text-shadow">{{ staticDatas.objects.menuTop.playstop.lib }}</span>
+        </a>
+        <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) === staticDatas.objects.menuTop.playstop.key }" class="submenu  bg bg-grey">
+                <app-submenu-playstop></app-submenu-playstop>
+        </div>
+    </li>
+    <li class="bg bg-danger border border-white text-white" style="border-right: solid 1px transparent;" title="{{  staticDatas.objects.menuTop.message.lib }}">
+        <a [queryParams]="{'menu-top' : staticDatas.objects.menuTop.message.key}" routerLink="/" style="display: inline-block;flex: 1;padding: 7px">
+            <span class="fa-stack">
+                <span class="fa-stack-1x" style="font-weight:900">{{counter$ | async}}</span>
+                <i class="far {{staticDatas.objects.menuTop.message.icon }} fa-stack-2x text-shadow"></i>
+            </span>
+            <span class="text-shadow">{{ staticDatas.objects.menuTop.message.lib }}</span>
+        </a>
+         <div [ngClass]="{ 'is-active': (routeParamsMenuTop$| async) === staticDatas.objects.menuTop.message.key }" class="submenu  bg bg-grey">
+                <app-submenu-message></app-submenu-message>
+        </div>
+    </li>
+    <li class="border border-white text-white" style="border-right: solid 1px transparent;padding:10px 30px;">
+        <span class="text-shadow" style="display: inline-block"><i class="far fa-user-alt" style="margin-right: 5px"></i>{{ appInitService.confFromServer.USER_ROLE | uppercase }}</span>
+    </li>
+</ul>

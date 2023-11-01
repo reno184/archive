@@ -1,0 +1,41 @@
+<!-- Title -->
+<h3 style="text-align: center">Préparation(s) missions</h3>
+<!-- Button close -->
+<a [routerLink]="['../../menu']" style="position:absolute;top:5px;right:5px" title="close">
+  <i class="fas fa-times-circle"></i>
+</a>
+<!-- Template loading -->
+<ng-template [ngIf]="(loading$ | async) === true">
+  <div class="test-loading" style="height: 100px; min-width: 100px;display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <i class="far fa-spinner fa-spin fa-2x"></i>
+  </div>
+</ng-template>
+<!-- Template pas de donnée -->
+<ng-template [ngIf]="(loading$ | async) === false && (list$ | async).length === 0">
+  <div class="test-empty" style="height: 100px; min-width: 100px;display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <i class="far fa-box-open fa-2x"></i>
+    <p>Pas de donnée</p>
+  </div>
+</ng-template>
+<!-- Template liste de données -->
+<ng-template [ngIf]="(loading$ | async) === false && (list$ | async).length > 0">
+    <ul class="test-not-empty border border-grey" style="max-height: 300px; overflow-y: auto; border-top: solid 1px transparent">
+        <li *ngFor="let r of list$ | async; let i = index" class="border border-grey" style="display: flex;border : solid 1px transparent;padding: 7px;border-top: none">
+            <span style="flex: 1">{{ r['mission-name']}}</span>
+            <a [queryParams]="{ modeView : 'update', id: r.id}" [routerLink]="['../detail']">
+                <i class="far fa-edit" style="margin-left: 5px"></i>
+            </a>
+            <a [queryParams]="{ mission : 'load', id: r.id, 'menu-top': 'prepa'}" [routerLink]="['']">
+                <i class="far fa-upload" style="margin-left: 5px"></i>
+            </a>
+        </li>
+    </ul>
+</ng-template>
+<!-- Footer contenant uniquement le bouton d'ajout-->
+<ng-template [ngIf]="(loading$ | async) === false">
+  <footer style="text-align: center;margin-top: 10px">
+    <a [queryParams]="{ modeView :'new' }" [routerLink]="['../detail']" class="btn btn-primary">
+      <span>Ajouter</span>
+    </a>
+  </footer>
+</ng-template>

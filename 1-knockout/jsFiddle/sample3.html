@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TypeAhead knockout and jquery</title>
+</head>
+<body>
+<h1>Knockout and Typeahead</h1>
+
+<section>
+  <!-- typeahead binding handler  -->
+  <input type="text" data-bind="typeahead: movies, value: movie, items: 3"/>
+  <span data-bind="text:movie"></span>
+
+  <ul data-bind="foreach: movies">
+    <li data-bind="text:$data"></li>
+  </ul>
+</section>
+</body>
+<script type="application/javascript">
+  ko.bindingHandlers.typeahead = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+      var $element = $(element);
+      console.log( ko.utils.unwrapObservable(valueAccessor()))
+      var allBindings = allBindingsAccessor();
+      // allBindingsAccessor, items, typeAhead function, value function
+
+      //var value = ko.utils.unwrapObservable(allBindings.value);
+      var source = ko.utils.unwrapObservable(valueAccessor());
+      var items = ko.utils.unwrapObservable(allBindings.items) || 4;
+
+      var valueChange =  function(item){
+        console.log('item = ' + item);
+        return item;
+      };
+
+      var highlighter = function(item){
+        var matchSpan = '<span style="color: blue;font-weight:bold">';
+        var query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+        return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+          return matchSpan + match + '</span>';
+        });
+      };
+
+      var options = {
+        source : source,
+        items: items,
+        updater: valueChange
+      };
+
+      $element
+              .attr('autocomplete', 'off')
+              .typeahead(options);
+    }
+  };
+
+
+  var vm = (function () {
+
+    var movie = ko.observable('');
+    var data = ['Iron Man', 'Iron Man 2', 'Iron Man 3', 'Avengers',
+      'LOTR: The Fellowship of the Ring',
+      'LOTR: The Two Towers',
+      'LOTR: The Return of the Ring',
+      'Star Wars I: Phantom Menace',
+      'Star Wars II: Attack of the Clones',
+      'Star Wars III: Revenge of the Sith',
+      'Star Wars IV: A New Hope',
+      'Star Wars V: The Empire Strikes Back',
+      'Star Wars VI: Return of the Jedi',
+      'The Princess Bride',
+      'Thor',
+      'Captain America'
+    ];
+    var movies = ko.observableArray(data);
+
+    var vm = {
+      movies: movies,
+      movie:movie
+    };
+
+    return vm;
+  })();
+
+  ko.applyBindings(vm);
+
+
+
+</script>
+</html>

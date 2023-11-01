@@ -1,0 +1,9 @@
+div.row.bg.bg-light.shadow-sm
+  each val, key in {  0: { path : "accueil", lib : "Page Accueil" }, 1 : { path : "page2", lib : "Page 2" }, 2 : { path : "contact", lib : "Page contact" }}
+    .col-sm-12.col-md-3.text-center
+      if(view === val.path)
+        a.nav-link.text-success(href="#" title=val.lib)= val.lib
+      else
+        a.nav-link(href=`${val.path}` title=val.lib)= val.lib
+  .col-sm-12.col-md-3.text-center
+    a.nav-link.text-warning(href="admin/sign-in" title="admin") Admin

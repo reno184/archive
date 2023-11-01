@@ -1,0 +1,18 @@
+<div [formGroup]="rootGroup" style="padding-bottom: 20px">
+<header class="border" style="text-align: center;padding: 10px; border-bottom: solid 1px transparent">
+    <strong>Zone de couverture</strong>
+</header>
+<main formGroupName="pci-list" style="padding-top: 20px">
+    <div *ngFor="let pci of pciArray.controls; let iPci=index" style="margin-bottom: 10px">
+        <div *ngIf="iPci == pciSelected" formGroupName="{{iPci}}">
+            <input [value]="true" formControlName="pci-is-180" id="i180" name="pci-is-180" type="radio"><label for="i180">Angle 180°</label>
+            <div style="margin-top: 10px;">
+                <input [value]="false" formControlName="pci-is-180" id="i120" name="pci-is-180" style="vertical-align: top" type="radio">
+                <label for="i120" style="margin-right: 20px">Angle 120°</label>
+                <label for="iZero">Zero: </label>
+                <input [readOnly]="pci.value['pci-is-180'] === true" formControlName="pci-degree" id="iZero" max="180" min="0" style="width: 100px;margin-left: 5px;" type="number">°
+            </div>
+        </div>
+    </div>
+</main>
+</div>

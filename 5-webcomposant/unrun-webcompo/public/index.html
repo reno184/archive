@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Commandes restaurant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+    <link rel="stylesheet" href="./assets/css/fontawesome.min.css" >
+    <link rel="stylesheet" href="./assets/css/regular.min.css" >
+    <link rel="stylesheet" href="./assets/css/style.css" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,800" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" >
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@corpuscule/custom-builtin-elements/lib/customElementsBase.js"></script>
+    <script src="https://unpkg.com/@corpuscule/custom-builtin-elements"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.min.js" defer ></script>
+    <script type="text/javascript" src="/__/firebase/6.0.2/firebase-app.js" defer ></script>
+    <script type="text/javascript" src="/__/firebase/init.js?useEmulator=true" defer ></script>
+    <script  src='./assets/js/app.js' type="module" defer ></script>
+</head>
+
+<body>
+<div style="position: absolute;height: 100vh;width: 100vw">
+    <layer-background class="layer-background"></layer-background>
+</div>
+
+
+<div style="position: absolute;height: 100vh;width: 100vw;display: flex;flex-direction: column;overflow-y: auto">
+    <header >
+    </header>
+    <main style="flex: 1">
+        <panel-carte class="panel-carte"></panel-carte>
+    </main>
+    <footer style="margin-top:30px;color:white">
+        <div style="display: flex;flex-direction: row;justify-content: space-around;margin-top: 10px">
+            <a href="#" id="btnBasket"><small><i class="far  fa-shopping-basket" style="margin-right: 5px"></i>Panier</small></a>
+            <a href="#" id="btnAvis" ><small><i class="far  fa-star" style="margin-right: 5px"></i>Avis</small></a>
+            <a href="#"><small><i class="far  fa-user" style="margin-right: 5px"></i>Profil</small></a>
+        </div>
+       <div style="text-align: center;margin: 30px 0">
+           <a href="https://crossmamba.web.app/">test</a>
+           <small>v1.0.8</small>
+       </div>
+
+
+    </footer>
+</div>
+<before-load class="before-load"></before-load>
+<carte-loader class="carte-loader"></carte-loader>
+<modal-center class="modal-center"></modal-center>
+<modal-bottom class="modal-bottom"></modal-bottom>
+<!--div id="detail"></div-->
+<script>
+
+    document.getElementById("btnAvis").addEventListener("click", function(e){
+        e.preventDefault();
+        document.querySelector("modal-center").setAttribute("data-action", "avis")
+    });
+   document.getElementById("btnBasket").addEventListener("click", function(e){
+       e.preventDefault();
+       document.querySelector("home-header").refresh().then(()=>window.location.hash = "#basket")
+   });
+
+   var getHash = function () {
+       var _url = window.location.hash.replace('#', '').split('/')[0];
+       if (_url.indexOf('?') > -1) {
+           _url = _url.split('?')[0]
+       }
+       return _url;
+   };
+    window.location.hash = "#"
+   window.addEventListener('hashchange', function(){
+       if(getHash()==="menucarte"){
+           document.querySelector("modal-center").setAttribute("data-action", "menu")
+       }
+       if(getHash()==="basket"){
+           document.querySelector("modal-center").setAttribute("data-action", "order")
+       }
+   });
+
+
+</script>
+</body>
+</html>

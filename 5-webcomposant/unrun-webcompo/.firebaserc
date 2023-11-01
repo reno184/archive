@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "dev-mamba"
+  },
+  "targets": {
+    "dev-mamba": {
+      "hosting": {
+        "light": [
+          "mambalight"
+        ]
+      }
+    }
+  }
+}

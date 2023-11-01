@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample1</title>
+    <style>
+        body {
+            Font-family: Consolas, monaco, monospace;
+            background: #fffde3 url("./assets/images/texture.png");
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid" style="height: 100vh; padding-top: 60px">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <h5>Test upload</h5>
+            <div class="card">
+                <div class="card-body ">
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="input2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h5>Test Api fetch</h5>
+            <div data-bind="foreach: pages">
+                <span data-bind="text: $index"></span>
+            </div>
+            <ul class="list-group" data-bind="foreach: list">
+                <li class="list-group-item"  data-bind="text: firstName"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script type="application/javascript">
+    const pageSize = 5
+    const position = 2
+    function  MyViewModel() {
+        this.loader = ko.observable(false);
+        this.items = ko.observableArray([]);
+        this.pages = ko.observableArray([]);
+        this.list = ko.computed(() =>{
+            return this.items.slice((position - 1) * pageSize, position * pageSize)
+        });
+        this.init = async ()=>{
+            this.loader(true)
+            const resp = await fetch('http://localhost:4000/api/1-customers')
+            const datas = await resp.json()
+            this.loader(false)
+            datas.forEach(item=>
+                this.items.push(item)
+            )
+            for (let i = 0; i < (datas.length/pageSize) ; i++) {
+                this.pages.push({index :i+1})
+            }
+        }
+    }
+    const appModel = new MyViewModel()
+    ko.applyBindings(appModel);
+    window.addEventListener('load', appModel.init)
+</script>
+</html>

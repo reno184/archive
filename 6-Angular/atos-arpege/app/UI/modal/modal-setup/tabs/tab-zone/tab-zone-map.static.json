@@ -1,0 +1,8 @@
+{
+  "id": "mapTabZone",
+  "defaultZoom": 9,
+  "minZoom": 9,
+  "maxZoom": 11,
+  "defaultLat": 43.4856,
+  "defaultLng": 5.343
+}

@@ -1,0 +1,40 @@
+extends ../../includes/header
+block var
+    - title = 'Authentification admin'
+    - view = "signin"
+    - domaine = "auth"
+
+block prepend head
+  style.
+    input[type="password"]:focus, input[type="email"]:focus {
+        z-index: 1
+    }
+
+block append head
+  script(src="/__/firebase/6.0.2/firebase-app.js")
+  script(src="/__/firebase/6.0.2/firebase-auth.js")
+  script(src="/__/firebase/init.js")
+  script(src="/js/lib/jquery-3.3.1.slim.min.js")
+  script(src='/js/lib/popper.min.js')
+  script(src='/js/lib/bootstrap.min.js')
+  script(src='/js/helpers.js')
+  script
+    include sign-in.js
+
+block content
+  div.bg-light.d-flex.justify-content-center.align-items-center(style="height:500px;widh:100vw")
+    div#frmLogged.card.shadow(style="margin-top:-150px;width:320px; display:none")
+      header.card-header.text-capitalize.text-center.font-weight-bold.bg-white.mb-3 
+        |Sign-In
+      form.card-body.d-flex.flex-column.align-items-center
+        label(for="iEmail" style="margin-bottom: 0")
+        input#iEmail.form-control(autofocus="autofocus" placeholder="Votre email" type="email" style="border-bottom-left-radius: 0;border-bottom-right-radius: 0;" name="email" value="boss@test.com" required="required")
+        label(for="iPassword" style="margin-bottom: 0")
+        input#iPassword.form-control(placeholder="Votre mot de passe" name="password" type="password" style="border-top: none; border-top-left-radius: 0;border-top-right-radius: 0;" value="jaijaijai" required="required" minlength="6")
+        button.mt-3.btn.btn-primary.btn-sm.btn-block(type="submit") Valider
+        div.alert.alert-danger.mt-3(role="alert" style="display:none")
+    div#pnlLogout.btn-group(role="group" style="margin-top:-250px;display:none") 
+      a.btn.btn-primary.btn-sm(href="/admin/article-list") Administration
+      button#btnLogout.btn.btn-outline-primary.btn-sm Déconnexion
+    div.text-center
+      a(href="/") Retour2

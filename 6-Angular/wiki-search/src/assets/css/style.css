@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+.rhe body {
+    font-family: 'Fira Sans', sans-serif;
+    background: url('./brick-wall.png');
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.rhe a[role=button]{
+   cursor :pointer;
+    color: #3968c6
+}
+.rhe a[role=button]:hover{
+    color: #28498b;
+    text-decoration : underline;
+}
+.rhe .modal ul li.list-group-item{
+    flex-shrink: 0;
+}
+
+.rhe .ql-container.ql-snow{
+    height : 200px;
+    overflow-y : auto;
+}
+
+.rhe .ais-Pagination-item--selected .ais-Pagination-link{
+    background: #3968c6;
+    border-color: #28498b;
+}
+
+.rhe .ais-Breadcrumb-link:hover, .ais-Breadcrumb-link:focus, .ais-HierarchicalMenu-link:hover, .ais-HierarchicalMenu-link:focus, .ais-Menu-link:hover, .ais-Menu-link:focus, .ais-Pagination-link:hover, .ais-Pagination-link:focus, .ais-RatingMenu-link:hover, .ais-RatingMenu-link:focus{
+    color: #28498b;
+}
+
+.rhe .ais-Breadcrumb-link, .ais-HierarchicalMenu-link, .ais-Menu-link, .ais-Pagination-link, .ais-RatingMenu-link{
+    color: #28498b;
+}
+
+.rhe .card-text pre{
+    padding: 10px;
+    background: #fcfcfc;
+    border-radius: 5px;
+
+}

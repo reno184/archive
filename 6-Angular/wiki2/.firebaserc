@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "protopapyrus": {
+      "hosting": {
+        "wiki2": [
+          "protopapyrus"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "protopapyrus"
+  }
+}

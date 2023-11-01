@@ -1,0 +1,30 @@
+<div [formGroup]="rootGroup" style="height: 350px">
+    <div *ngIf="isActive(pciSelected)" style="display: flex;height: 100%">
+    <!-- FO stock -->
+    <app-fo-stock-panel></app-fo-stock-panel>
+        <!-- gutter -->
+    <div style="display: flex;align-items:center;justify-content: center;width: 40px">
+        <i class="far fa-exchange"></i>
+    </div>
+        <!-- FO attached -->
+    <app-fo-attached-panel (clickedEvent)="onClickDetail($event)"></app-fo-attached-panel>
+        <!-- gutter -->
+    <div style="display: flex;align-items:center;justify-content: center;width: 40px">
+        <i class="far fa-info-circle"></i>
+    </div>
+        <!-- Fo detail panel -->
+    <app-pci-fo-panel [foDetailId]="selectedFoId"></app-pci-fo-panel>
+        <!-- gutter -->
+    <div style="display: flex;align-items:center;justify-content: center;width: 40px">
+        <i class="far fa-wifi"></i>
+    </div>
+        <!--  -->
+    <div style="height:100%;width: 300px; border: solid 1px #aaa;background-color: white;overflow-y: auto">
+        <app-fo-coverage-panel></app-fo-coverage-panel>
+        <app-arc-attached-panel></app-arc-attached-panel>
+    </div>
+    </div>
+   <div *ngIf="!isActive(pciSelected)" style="display: flex;flex-direction: column;align-items: center;justify-content: center;height: 70%">
+        <h2 class="text-grey">{{pciSelected}} inactif...</h2>
+    </div>
+</div>

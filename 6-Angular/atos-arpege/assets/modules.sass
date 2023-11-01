@@ -1,0 +1,142 @@
+
+
+.fa-stack
+  font-size: 0.8em
+  vertical-align: middle
+
+.customSelect
+  font-size: .9rem
+  border: solid 1px #aaaaaa
+  border-radius: 8px
+  padding: 2px 0
+  outline: 0
+  min-width: 150px
+
+.link
+  color: $blue-primary
+
+.link:hover
+  color: $blue-secondary
+
+
+.arrow_downup
+  i
+    opacity: 1
+    visibility: visible
+    transition: opacity .5s, transform .5s, visibility .5s
+  &.active
+    i
+      opacity: 0
+      visibility: hidden
+      transform: rotateX(-180deg) translateY(0px)
+
+.content_downup
+  max-height: 0
+  opacity: 0
+  visibility: hidden
+  transition: opacity .5s, max-height .5s, visibility .5s
+  &.active
+    max-height: 600px
+    opacity: 1
+    visibility: visible
+    transition: opacity 1s linear .5s, max-height 1.5s linear .5s
+
+.hr
+  border: 0
+  height: 1px
+  background-image: linear-gradient(to right, rgba(0, 0, 0, .02), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, .02))
+
+.nav-tabs
+  border-bottom: 1px solid $grey-primary
+
+.nav-tabs .nav-item
+  margin-bottom: -1px
+
+.nav-tabs .nav-link
+  border: 1px solid transparent
+  border-top-left-radius: .25rem
+  border-top-right-radius: .25rem
+
+
+.nav-tabs .nav-link.active
+  border-color: $grey-primary $grey-primary #fff
+  background-color: white
+
+.nav
+  display: flex
+
+.nav-link
+  display: block
+  padding: .5rem 1rem
+
+.alert
+  padding: .75rem
+  border-radius: .25rem
+  border: solid 1px transparent
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, .5)
+
+.alert-danger
+  color: white
+  background-color: $red-secondary
+  border-color: $red-primary
+
+.btn
+  display: inline-block
+  font-weight: bold
+  background-color: transparent
+  border: solid 1px transparent
+  padding: .375rem .75rem
+  border-radius: .25rem
+  line-height: 1.3
+  font-size: 1rem
+
+.btn.btn-primary
+  color: $blue-primary
+  border-color: $blue-primary
+
+.btn.btn-secondary
+  color: grey
+  border-color: grey
+
+.btn[disabled]
+  opacity: .60
+
+input[readonly]
+  background-color: transparent
+
+.tooltip
+  position: absolute
+  z-index: 2
+  top: 20px
+  left: 0
+  display: none
+  background-color: white
+  border-radius: 3px
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .4)
+  border: solid 1px $grey-primary
+  padding: 3px 10px
+  font-size: .8rem
+  text-align: center
+
+.tooltip.in
+  display: inline-block
+
+.list-item
+  padding: .75rem
+  border: 1px solid rgba(0, 0, 0, .125)
+  border-top: none
+
+  &.inverse
+    background-image: linear-gradient($blue-secondary, $blue-primary)
+    color: white
+
+.group-item
+  border-top: 1px solid rgba(0, 0, 0, .125)
+
+.transform_center
+  transform-origin: center
+
+@for $i from 0 through 360
+  .rotate_#{$i}
+    transform: rotate(#{$i}deg)
+

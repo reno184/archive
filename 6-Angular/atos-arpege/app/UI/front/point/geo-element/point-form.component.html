@@ -1,0 +1,81 @@
+<div style="display: flex;height: 100%">
+    <a appLocationBack style="position:absolute;top:5px;right:5px" title="close">
+      <i class="fas fa-times-circle"></i>
+    </a>
+    <div style="flex: 1">
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" style="width: 400px">
+        <h3 style="text-align: center;margin-bottom: 0">
+          <span *ngIf="!(params$|async).id" style="margin-right: 5px">{{appInitService.staticDatas.labels.add | titlecase}}</span>
+          <span *ngIf="(params$|async).id" style="margin-right: 5px">{{appInitService.staticDatas.labels.update | titlecase}}</span>
+          <span *ngIf="(params$| async)['marker-type']=== 'point'">{{appInitService.staticDatas.labels.point}}</span>
+          <span *ngIf="(params$| async)['marker-type']!== 'point'">{{appInitService.staticDatas.labels.zone}}
+              <span *ngIf="(params$| async)['marker-type']=== 'interet'">{{appInitService.staticDatas.labels.interest}}</span>
+              <span *ngIf="(params$| async)['marker-type']!== 'interet'">{{appInitService.staticDatas.labels.forbidden}}</span>
+          </span>
+        </h3>
+            <!-- <pre><small>{{formGroup.get('coordinate-point').value |json}}</small></pre>-->
+            <div style="margin: 10px 0">
+                <label [ngClass]="{'text-danger' : formGroup.get('marker-title').hasError('required')}" for="iTitle" style="margin-right: 10px">{{appInitService.staticDatas.labels.name | titlecase}}</label>
+                <input appAutofocusInput formControlName="marker-title" id="iTitle" style="margin-right: 10px" type="text"/>
+                <ng-container *ngIf=" (params$| async)['marker-type'] === 'point' ">
+                <span>Icon</span>
+                <span [isClickBehavior]="true" appTooltip>
+                <i class="far {{ formGroup.get('popover-icon').value}}"></i>
+                <span class="tooltip" style="width: 120px; left:  -100px; padding: 7px 0"><app-icon-picker (clickedEvent)="onSelectIcon($event)"></app-icon-picker></span>
+                </span>
+                </ng-container>
+                <ng-container *ngIf=" (params$| async)['marker-type'] !== 'point' ">
+                    <span [isClickBehavior]="true" appTooltip>
+                        <i [ngStyle]="{color: formGroup.get('color-border').value}" class="far fa-hexagon"></i>
+                        <span class="tooltip" style="width: 120px; left:  -90px"><app-color-picker (clickedEvent)="onColorBorderPick($event)"></app-color-picker></span>
+                    </span>
+                    <span [isClickBehavior]="true" appTooltip>
+                        <i [ngStyle]="{color: formGroup.get('color-inner').value}" class="fas fa-hexagon"></i>
+                        <span class="tooltip" style="width: 120px; left:  -90px"><app-color-picker (clickedEvent)="onColorInnerPick($event)"></app-color-picker></span>
+                    </span>
+                    <div>
+                         <label for="idOpacity">Opacite</label>
+                    <input formControlName="zone-opacity" id="idOpacity" max=".9" min="0.3" step="0.1" type="number" value="0.6">
+                    </div>
+
+                </ng-container>
+            </div>
+        <ng-container *ngIf=" (params$| async)['marker-type'] === 'point' ">
+             <label for="iAltitude" style="margin-right: 5px">{{staticDatas.labels.altitude | titlecase}}</label>
+            <input formControlName="altitude-single" id="iAltitude" min="0" style="width: 100px;" type="number"/>
+        </ng-container>
+        <ng-container *ngIf=" (params$| async)['marker-type'] !== 'point' ">
+            <div formGroupName="altitude-range" style="display: flex;height: 27px; align-items: center;margin: 10px 0;">
+                <div style="margin-right: 5px">
+                    <label for="iStart" style="margin-right: 5px">{{appInitService.staticDatas.labels.altitude | titlecase}} {{appInitService.staticDatas.labels.from}}</label>
+                    <input formControlName="start" id="iStart" min="0" style="width: 100px;" type="number"/>
+                </div>
+                <div>
+                    <label for="iEnd" style="margin-right: 5px">{{appInitService.staticDatas.labels.to}}</label>
+                    <input formControlName="end" id="iEnd" min="0" style="width: 100px;" type="number"/>
+                </div>
+            </div>
+        </ng-container>
+
+        <footer style="display:flex; justify-content: space-around;margin-top: 20px;padding-top: 20px; border-top: solid 1px #aaaaaa">
+        <a appLocationBack class="btn btn-primary">{{appInitService.staticDatas.labels.back | titlecase}}</a>
+        <button [appLoadingButton]="(submitting$ | async)" [disabled]="formGroup.invalid  || (submitting$ | async)" [libelle]="'Valider'" class="btn btn-primary" type="submit"></button>
+        </footer>
+        </form>
+        </div>
+     <div style="flex: 1;height: 100%;position: relative; border-radius: 5px;overflow: hidden">
+        <div id="map4" style="width: 100%; height: 100%;z-index: 0;position: absolute"></div>
+          <div style="position:absolute; padding: 10px 0;bottom:0; width: 100%; text-align: center">
+            <ng-container *ngIf="(params$| async)['marker-type'] ==='point'">
+               <a (click)="onDrawPoint()" style="display: inline-block; padding: 3px 10px;border-radius: 3px;box-shadow: 1px 1px 3px rgba(0,0,0,.5);background-color: white; margin-left: 5px">{{appInitService.staticDatas.labels.add | titlecase}}{{appInitService.staticDatas.labels.point}}</a>
+            </ng-container>
+            <ng-container *ngIf="(params$| async)['marker-type'] !=='point'">
+                <a (click)="onDrawCircle()" style="display: inline-block; padding: 3px 10px;border-radius: 3px;box-shadow: 1px 1px 3px rgba(0,0,0,.5);background-color: white; margin-left: 5px">{{appInitService.staticDatas.labels.circle}}</a>
+                <a (click)="onDrawPolygone()" style="display: inline-block; padding: 3px 10px;border-radius: 3px;box-shadow: 1px 1px 3px rgba(0,0,0,.5);background-color: white; margin-left: 5px">{{appInitService.staticDatas.labels.polygon}}</a>
+            </ng-container>
+        </div>
+         <!--        <div *ngIf="!(params$| async)['mode-map']" [routerLink]="['/', { outlets: { front: ['front','geo', 'detail'] } }]" queryParamsHandling="merge" [queryParams]="{ 'mode-map' : 'drawing'}" style="position:absolute;display: flex; background-color: rgba(0,0,0,.4); padding: 10px 0; align-items: flex-end; justify-content: center; width: 100%; height: 100%">
+                      <a style="display: inline-block; padding: 3px 10px;border-radius: 3px;box-shadow: 1px 1px 3px rgba(0,0,0,.5);background-color: white">Dessiner</a>
+                 </div>-->
+     </div>
+</div>

@@ -1,0 +1,53 @@
+
+.menu-backdrop
+  z-index: 3
+  position: absolute
+  top: 0
+  width: 100vw
+  height: 100vh
+  background: rgba(0, 0, 0, .2)
+  display: none
+  &.is-open
+    display: inline-block
+
+.drawer
+  position: absolute
+  z-index: 3
+  top: 0
+  right: 0
+  width: 320px
+  height: 100vh
+  display: flex
+  transform: translateX(280px)
+  transition: transform .8s
+  &.is-open
+    transform: translateX(0px)
+
+nav
+  height: 100%
+  padding-top: 50px
+  width: 40px
+  a
+    display: inline-block
+    margin-top: 10px
+    width: 100%
+    padding: 10px 0
+    border: solid 1px black
+    border-right: none
+    border-top-left-radius: 5px
+    border-bottom-left-radius: 5px
+    background: white
+    text-align: center
+    &.is-active
+      border-right: solid 2px #eee
+      background: #eee
+
+main
+  height: 100%
+  flex: 1
+  background: #eee
+  border-left: solid 1px black
+  section
+    display: none
+    &.is-active
+      display: block

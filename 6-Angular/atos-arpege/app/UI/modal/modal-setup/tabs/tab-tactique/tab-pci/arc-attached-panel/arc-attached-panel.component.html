@@ -1,0 +1,44 @@
+<div [formGroup]="rootGroup">
+    <div *ngFor="let pciFormGroup of pciList.controls; let indexPci=index" formArrayName="pci-list">
+         <div *ngIf="indexPci === pciSelected" formGroupName="{{indexPci}}">
+            <main *ngFor="let arc of getArcAttached(pciFormGroup).controls; let iArc=index" class="odd" formArrayName="arc-attached">
+                <div formGroupName="{{iArc}}" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-row-gap: 10px;grid-column-gap:5px;padding: 10px; align-items: center">
+                    <label for="i_{{iArc}}type"><small>Type</small></label>
+                        <select formControlName="type" id="i_{{iArc}}type" style="grid-column: span 3 ">
+                            <option *ngFor="let arcMode of (staticDatas.objects['fo-mode'] | keyvalue )" [selected]="arcMode.key ===  arc.value['type'] " value="{{arcMode.key}}">{{ arcMode.value.lib | titlecase}}</option>
+                        </select>
+                    <!--  -->
+                    <label for="i_{{iArc}}rayon"><small>Rayon</small></label>
+                    <input formControlName="rayon" id="i_{{iArc}}rayon" min="0" type="number">
+                    <small>km</small>
+                    <span></span>
+                    <label for="i_{{iArc}}trait"><small>Trait</small></label>
+                    <select formControlName="trait" id="i_{{iArc}}trait">
+                    <option *ngFor="let styleTrait of (appInitService.staticDatas.dropdownlist.styleTrait | keyvalue)" [selected]="styleTrait.key ===  arc.value['trait'] " value="{{styleTrait.key}}">{{ styleTrait.lib | titlecase}}</option>
+                    </select>
+                    <div [ngClass]="{'text-danger': idRequired(arc) }">
+                        <strong>*</strong>
+                        <label for="iColor{{iArc}}"><small>Couleur</small></label>
+                    </div>
+                    <div>
+                        <input formControlName="color" id="iColor{{iArc}}" type="hidden">
+                        <span [isClickBehavior]="true" appTooltip>
+                            <i [ngStyle]="{color: arc.value['color']}" class="fas fa-wifi"></i>
+                            <span class="tooltip" style="width: 120px; left:  -100px">
+                                <app-color-picker (clickedEvent)="onColorChosen($event,arc)"></app-color-picker>
+                            </span>
+                        </span>
+                    </div>
+                    <div style="text-align: center;padding-bottom: 10px;grid-column: span 4">
+                    <a (click)="onDetach(iArc)" class="link"><small>Supprimer</small></a>
+                    </div>
+                </div>
+            </main>
+             <footer style="text-align: center;padding: 10px; border-top: solid 1px #aaa;">
+    <a (click)="onAttach()" class="link">{{appInitService.staticDatas.labels.add | titlecase}} Arc</a>
+</footer>
+         </div>
+    </div>
+
+
+</div>

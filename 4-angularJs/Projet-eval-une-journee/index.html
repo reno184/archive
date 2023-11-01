@@ -1,0 +1,134 @@
+<html class="spir @@version">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>SPIR test @@version</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link href="assets/css/spir.css?rel=@@timestamp" rel="stylesheet"> </head>
+    <!--comment-->
+
+    <body ng-app="SpirApp">
+        <script type="text/ng-template" id="assets/tpl/tpl.serviceTree.html">
+            <ul class="treeList">
+                <li ng-repeat="item in servicesArboList">
+                    <!--input type="checkbox" name="itemSelection"  ng-model="item.Selected"/ -->
+                    <a href="#?idservice={{item.id}}" title="{{item.lib}}" ng-class="{ 'label label-primary': selectedItem(item.id)}">{{item.lib}}</a>
+                    <span ng-include=" 'assets/tpl/tpl.serviceTree.html' " onload="servicesArboList = item.children"> </span>
+                </li>
+            </ul>
+        </script>
+        <div class="container">
+            <div class="panel panel-default" ng-controller="SearchServiceCrtl">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recherche service </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <form action="#" id="searchForm" ng-submit="rechercherServices(); $event.preventDefault()" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="txtService" class="col-xs-3 control-label">Service : </label>
+                                    <div class="col-xs-9">
+                                        <input type="text" name="txtService" class="form-control " id="txtService" placeholder="Entrer service">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtFonction" class="col-xs-3 control-label">Fonction : </label>
+                                    <div class="col-xs-9">
+                                        <input type="text" name="txtFonction" class="form-control " id="txtFonction" placeholder="Entrer fonction"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtPost" class="col-xs-3 control-label">Poste : </label>
+                                    <div class="col-xs-9">
+                                        <input type="text" name="txtPoste" class="form-control " id="txtPost" placeholder="Entrer poste"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-offset-3 col-xs-9">
+                                        <button type="submit" class="btn btn-primary   ">Rechercher</button> <img src="assets/img/ajax-loader_1.gif" id="loader" alt="loader" class="hidden" /> </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-xs-7">
+                            <table class="table table-hover serviceList">
+                                <thead>
+                                    <tr>
+                                        <th>Service</th>
+                                        <th>Service parent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in serviceList" dir-paginate="item in serviceList | itemsPerPage: 5" pagination-id="serviceListPagination">
+                                        <td>
+                                            <a href="#?idservice={{item.IdService}}" title="{{item.LibelleService}}">{{item.LibelleService}} </a>
+                                        </td>
+                                        <td>
+                                            <a href="#?idservice={{item.IdServiceParent}}" title="{{item.LibelleServiceParent}}">{{item.LibelleServiceParent}}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pull-right ">
+                                <dir-pagination-controls template-url="assets/tpl/tpl.dirPagination.html" pagination-id="serviceListPagination" direction-links="false" max-size="7">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="panel panel-default" ng-controller="SearchPersonCrtl">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Recherche service</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div ng-include=" 'assets/tpl/tpl.serviceTree.html' "> </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <table class="table table-hover userList">
+                                <thead>
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Poste</th>
+                                        <th>Fonction</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in userList" ng-class="{active: item.isResponsable, info: item.isAssistant}" dir-paginate="item in userList | itemsPerPage: 10 " pagination-id="userListPagination">
+                                        <td>
+                                            <a href="http://google.com?id={{item.index}}" title="item.matricule" target="_blank">{{item.matricule}}</a>
+                                        </td>
+                                        <td>{{item.nom}}</td>
+                                        <td>{{item.prenom}}</td>
+                                        <td>{{item.poste}}</td>
+                                        <td>{{item.fonction}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pull-left" ng-if="userList.length > 0">
+                                <span>Legend : </span>
+                                <span class="label label-default">Responsable</span>
+                                <span class="label label-info">Assistant</span>
+                            </div>
+                            <div class="pull-right ">
+                                <dir-pagination-controls template-url="assets/tpl/tpl.dirPagination.html" pagination-id="userListPagination" direction-links="false" max-size="7"></dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="assets/js/lib/angular.min.js"></script>
+<script src="assets/js/lib/dirPagination.js"></script>
+<script src="assets/js/data/json.bouchon.data.js?rel=@@timestamp"></script>
+<script src="assets/js/app.js?rel=@@timestamp"></script>
+
+
+    </body>
+
+</html>
+

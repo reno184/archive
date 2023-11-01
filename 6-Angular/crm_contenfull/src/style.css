@@ -1,0 +1,17 @@
+.rhe a{
+    cursor : pointer!important;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+ul > li.list-group-item {
+    flex-shrink: 0 !important;
+}
+
+.ng-touched.ng-invalid, .ng-dirty.ng-invalid {
+    border-color: #dc1212
+}

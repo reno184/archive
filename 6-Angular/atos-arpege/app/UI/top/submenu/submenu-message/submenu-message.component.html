@@ -1,0 +1,24 @@
+<div *ngIf="loading$ | async; then loading; else noLoading"></div>
+    <ng-template #loading>
+        <ul>
+            <li>
+                <i class="far fa-spinner fa-spin text-danger"></i>
+            </li>
+        </ul>
+    </ng-template>
+    <ng-template #noLoading>
+        <ul>
+            <ng-container *ngFor="let message of messageArray$ | async">
+            <li [hidden]="message.read === true" style="display: flex;margin-top: 5px; padding: 0 5px">
+            <i class="far {{getClassIcon(message.category) }}"></i>
+            <small style="min-width: 200px;flex: 1">{{message.body}}</small>
+            <a (click)="markAsRead(message.id)" class="link" title="{{ labelMessage.itemread.title }}"><i class="far fa-times-circle"></i></a>
+            </li>
+            </ng-container>
+            <li class="menu-item" style="display: flex; justify-content: space-around; margin-bottom: 5px">
+            <a (click)="markAllRead($event)" class="link" title="{{ labelMessage.allread.title }}"><i class="far fa-ban" style="margin-right: 5px"></i><small>{{ labelMessage.allread.lib }}</small></a>
+            <a [queryParams]="{ 'menu-right' : 'logAction' } " class="link" routerLink="/" title="{{ labelMessage.log.title }}"><i class="far fa-ellipsis-h" style="margin-right: 5px"></i><small>{{ labelMessage.log.lib }}</small></a>
+            </li>
+        </ul>
+    </ng-template>
+

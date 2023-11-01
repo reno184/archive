@@ -1,0 +1,22 @@
+
+body {
+    margin: 0;
+
+    height: 100vh;
+    font-size: 100%;
+    font-family: Georgia, Times, Times New Roman, serif;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+.custom-font{
+    font-size: 300%;
+    font-family :  'Dancing Script', cursive
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color:inherit;
+}

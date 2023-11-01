@@ -1,0 +1,16 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow-sm
+    a.navbar-brand(href="#") Navbar
+    button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+    div#navbarTogglerDemo02.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+            each val, key in {  0: { path : "accueil", lib : "Page dashboard" }, 1 : { path : "inspiration", lib : "inspiration" }}
+                if(view === val.path)
+                    li.nav-item.active
+                        a.nav-link.text-success(href="#" title=val.lib)= val.lib
+                else
+                li.nav-item
+                    a.nav-link.text-success(href="#" title=val.lib)= val.lib
+        form.form-inline.my-2.my-lg-0
+            input.form-control.mr-sm-2(type="search" placeholder="Search")
+            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search

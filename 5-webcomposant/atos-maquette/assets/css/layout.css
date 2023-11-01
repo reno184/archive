@@ -1,0 +1,14 @@
+/* BEGIN SMACSS LAYOUT */
+.l-header, .l-footer {
+  position: relative;
+  width: 100vw;
+}
+
+.l-main {
+  flex: 1;
+  z-index: 0;
+}
+
+/* END SMACSS LAYOUT */
+
+/*# sourceMappingURL=layout.css.map */

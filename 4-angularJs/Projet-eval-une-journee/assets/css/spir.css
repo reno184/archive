@@ -1,0 +1,22 @@
+.spir .container {
+  width: 1024px;
+  max-width: none!important;
+  padding-top: 30px;
+}
+.spir ul {
+  list-style: none;
+  padding-left: 7px;
+}
+.spir ul li {
+  line-height: 23px;
+}
+.spir .treeList a.label.label-primary {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: normal;
+}
+.spir table.userList,
+.spir table.serviceList {
+  font-size: 14px;
+}

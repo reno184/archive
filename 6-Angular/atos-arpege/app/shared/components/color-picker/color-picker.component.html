@@ -1,0 +1,4 @@
+<div>
+  <a (click)="onSelect(color)" *ngFor="let color of staticConfig.colors" [ngStyle]="{ 'background-color': color }" class="square-color border border-grey" style="border: solid 1px transparent"></a>
+</div>
+

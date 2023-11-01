@@ -1,0 +1,29 @@
+.menu-top-backdrop
+  z-index: 1
+  position: absolute
+  top: 0
+  width: 100vw
+  height: 100vh
+  background: rgba(0, 0, 0, .05)
+  display: none
+
+  &.is-open
+    display: inline-block
+
+.submenu
+  position: absolute
+  display: none
+  border: solid 1px white
+  border-bottom-left-radius: 5px
+  border-bottom-right-radius: 5px
+  border-top: none
+  top: 1px
+  left: -1px
+  padding: 10px 5px
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .6)
+
+  &.is-active
+    opacity: 1
+    visibility: visible
+    display: block
+    transition: opacity 1s

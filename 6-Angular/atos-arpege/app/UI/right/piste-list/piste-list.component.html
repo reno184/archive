@@ -1,0 +1,113 @@
+<ng-container *ngIf="(trackList$ | async).length>0; else loadingBlock">
+<h3 [ngPlural]=" (trackList$ | async).length" style="text-align: center;margin-bottom: 10px">
+  <ng-template ngPluralCase="one">Piste</ng-template>
+  <ng-template ngPluralCase="other">Pistes</ng-template>
+</h3>
+<div style="margin-left: 10px;margin-bottom: 10px">
+    <input (change)="onToggleAll()" checked="checked" id="iToggleAll" style="margin-right: 5px" type="checkbox">
+    <label for="iToggleAll">Tous</label>
+</div>
+
+<div *ngFor="let track of (trackList$ | async)" style="width: 100%;padding: 0 10px">
+    <div [ngClass]="{ 'border-primary' : track.onScene  }" [ngStyle]="{'box-shadow' : track.onScene ? '2px 2px 2px rgba(0,0,0,.2)' :'none'}" class="border" style="background: white; border-radius: 5px; border: solid 1px transparent; overflow: hidden;margin-bottom: 5px; ">
+            <div class="border" style="background-color: white;padding: 5px 0;text-align: center;border-bottom: solid 1px transparent">
+            TN : {{track.tn_ref}}
+        </div>
+<div style="display: grid;grid-template-columns: 1fr 2fr 1fr">
+    <!-- Identity-->
+    <div style="text-align: right;background: #fafafa;padding:5px">
+        <small>{{staticDatas.labels.identity | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #fafafa;padding:5px">
+        <small>{{staticDatas.objects.trackIdentity[track.identity].lib | titlecase}}</small>
+    </div>
+    <div style="text-align: left;background: #fafafa;padding:5px; ">
+        <label for="iIdentity"></label>
+        <select (change)="onChangeIdentity(track.tn_id,$event)" id="iIdentity">
+                <option *ngFor="let identity of staticDatas.objects.trackIdentity | keyvalue" [selected]="identity.key === track.identity" [value]="identity.key">{{identity.value.lib}}</option>
+        </select>
+    </div>
+    <!-- status-->
+   <div style="text-align: right;background: #efefef;padding:5px">
+        <small>{{staticDatas.labels.status | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px; ">
+        <small>{{staticDatas.objects.trackStatus[track.status].lib | titlecase}}</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px; ">
+       <div *ngIf="track.status === 0" style="display: flex"><button (click)="onToggleActive(track.tn_id, 1)">Inactive</button></div>
+       <div *ngIf="track.status === 1" style="display: flex"><button (click)="onToggleActive(track.tn_id, 0)">Active</button></div>
+    </div>
+    <!-- kill-->
+   <div style="text-align: right;background: #fafafa;padding:5px">
+        <small>{{staticDatas.labels.kill | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #fafafa;padding:5px;">
+        <small>{{staticDatas.objects.trackKill[track.kill].lib | titlecase }}</small>
+    </div>
+    <div style="text-align: right;background: #fafafa;padding:5px">
+        <button (click)="onKill(track.tn_id)" *ngIf="track.kill === 0">Kill</button>
+    </div>
+    <!-- Cap degree -->
+    <div style="text-align: right;background: #efefef;padding:5px">
+        <small>{{staticDatas.labels.cap | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px">
+        <small>{{  staticDatas.objects['unit-degree'][(unitDegree$ |async)].coef(track.course) | number : '1.0-2'}}</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px">
+        <small>{{staticDatas.objects['unit-degree'][(unitDegree$ |async)].lib}}</small>
+    </div>
+    <!-- Vitesse -->
+    <div style="text-align: right;background: #fafafa;padding: 5px">
+        <small>{{staticDatas.labels.vitesse | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #fafafa;padding:5px">
+        <small>{{track.speed * staticDatas.objects['unit-speed'][(unitSpeed$ |async)].coef | number : '1.0-2'}}</small>
+    </div>
+    <div style="text-align: left;background: #fafafa;padding: 5px">
+        <small>{{staticDatas.objects['unit-speed'][(unitSpeed$ |async)].lib}}</small>
+    </div>
+    <!-- Altitude -->
+    <div style="text-align: right;background: #efefef;padding:5px">
+        <small>{{staticDatas.labels.altitude | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px">
+        <small>{{track.altitude * staticDatas.objects['unit-altitude'][(unitAltitude$ |async)].coef | number : '1.0-2'}}</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px">
+        <small>{{staticDatas.objects['unit-altitude'][(unitAltitude$ |async)].lib}}</small>
+    </div>
+    <!-- Lat -->
+    <div style="text-align: right;background: #fafafa;padding:5px">
+        <small>{{staticDatas.labels.lat | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #fafafa;padding:5px; grid-column: span 2">
+        <small style="align-self: center;">{{staticDatas.objects['unit-latlng'][(unitLatLng$ |async)].lat(track.position.lat)}}</small>
+    </div>
+    <!-- lng -->
+    <div style="text-align: right;background: #efefef;padding:5px">
+        <small>{{staticDatas.labels.lng | titlecase}}:</small>
+    </div>
+    <div style="text-align: left;background: #efefef;padding:5px;  grid-column: span 2">
+        <small>{{staticDatas.objects['unit-latlng'][(unitLatLng$ |async)].lng(track.position.lng)}}</small>
+    </div>
+</div>
+        <div class="border" style="display: flex;padding: 3px 0; border-top:solid 1px transparent">
+            <span style="flex: 1; text-align: center">
+               <a (click)="onRemoveScene(track)" *ngIf="track.onScene"><i class="far fa-map-marker-minus"></i></a>
+               <a (click)="onAddScene(track)" *ngIf="!track.onScene"><i class="far fa-map-marker-plus"></i></a>
+            </span>
+            <span style="flex: 1; text-align: center">
+                <a (click)="onSelect(track)" *ngIf="track.onScene"><i class="far fa-map-marker-check"></i></a>
+            </span>
+        </div>
+    </div>
+</div>
+</ng-container>
+<ng-template #loadingBlock>
+    <div style="height: 100%;width: 100%;display: flex; align-items: center;justify-content: center">
+        <i class="far fa-spin fa-spinner fa-2x"></i>
+    </div>
+</ng-template>
+

@@ -1,0 +1,11 @@
+# features
+- gruntfile
+  - cssmin
+  - less
+- AngularJs
+  - Pagination
+  - watch on url
+- Javascript
+  - array slice
+- Tools
+  - Json generator http://www.json-generator.com/

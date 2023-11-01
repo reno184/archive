@@ -1,0 +1,39 @@
+<div [formGroup]="rootGroup">
+        <div formGroupName="participants" style="display: flex;justify-content: space-around">
+            <div *ngFor="let clan of this.staticDatas.objects.trackIdentity | keyvalue; let clanIndex = index " style="border: solid 1px #ddd;border-radius: 4px;margin-left: 5px;margin-right: 5px">
+                <header class="border" style="text-align: center;padding: 10px;border-bottom: solid 1px transparent">
+                    <strong>
+                        <i [ngStyle]="{color: clan.value.color}" class="fas fa-flag" style="margin-right: 5px"></i>{{clan.value.lib}}
+                    </strong>
+                    <div style="margin-top: 10px">
+                        <label for="idSignal{{clanIndex}}" style="align-self: center"></label>
+                        <select id="idSignal{{clanIndex}}">
+                            <option *ngFor="let signal of appInitService.configDatas.signaux | keyvalue" [value]="signal.key">{{signal.value.lib}}</option>
+                        </select>
+                        <a (click)="onAddFilterToClan(getFiltersByClan(rootGroup.get('participants'), clan.key),clanIndex)" style="margin-left: 5px">
+                            <i class="far fa-plus-circle"></i>
+                        </a>
+                    </div>
+                </header>
+                <main style="height: 250px;width:230px;overflow-y: auto;">
+                    <div *ngFor="let participant of getFiltersByClan(rootGroup.get('participants'),clan.key).controls ; let i=index" formArrayName="{{clan.key}}">
+                        <fieldset formGroupName="{{i}}" style="border: solid 1px #bbb;width:200px;margin-left: 10px">
+                            <legend><small>{{participant.get('signal').value}}</small></legend>
+                            <label for="idRule{{i}}" style="align-self: center"></label>
+
+                            <input [readOnly]="participant.get('readOnly').value" formControlName="rule" id="idRule{{i}}" type="text">
+                            <div *ngIf="participant.get('rule').invalid && (participant.get('rule').dirty || participant.get('rule').touched)" class="text-danger" style="grid-column: span 4;">
+                                <small *ngIf="participant.get('rule').errors.required" style="display: inline-block;width:100%">{{getErrorMessage(participant.get('signal').value, 'required')}}</small>
+                                <small *ngIf="participant.get('rule').errors.minlength" style="display: inline-block;width:100%">{{getErrorMessage(participant.get('signal').value, 'minlength')}}</small>
+                                <small *ngIf="participant.get('rule').errors.maxlength" style="display: inline-block;width:100%">{{getErrorMessage(participant.get('signal').value, 'maxlength')}}</small>
+                                <small *ngIf="participant.get('rule').errors.forbiddenInput" style="display: inline-block;width:100%">{{getErrorMessage(participant.get('signal').value, 'forbiddenInput')}}</small>
+                            </div>
+                            <footer style="text-align: center;grid-column: span 2">
+                                <a (click)="onRemoveFilterToClan(getFiltersByClan(rootGroup.get('participants'), clan.key), i)" class="link"><small>Supprimer</small></a>
+                            </footer>
+                        </fieldset>
+                    </div>
+                </main>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,30 @@
+<div>
+    <!-- Button close -->
+<a [routerLink]="['../../setup/list']" style="position:absolute;top:5px;right:5px" title="close">
+  <i class="fas fa-times-circle"></i>
+</a>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <strong class="nav-link"><i class="far fa-cogs" style="margin-right: 5px"></i>Préparation mission</strong>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" queryParamsHandling="preserve" routerLink="general" routerLinkActive="active">Général</a>
+            </li>
+            <li class="nav-item">
+                <a [routerLink]="['./tactique']" class="nav-link" queryParamsHandling="preserve" routerLinkActive="active">Situation tactique</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" queryParamsHandling="preserve" routerLink="zone/point" routerLinkActive="active">Position zones</a>
+            </li>
+        </ul>
+        <form (ngSubmit)="onSubmitForm()" [formGroup]="rootGroup">
+            <router-outlet></router-outlet>
+            <footer style="border-top: solid 1px #aaa ;margin-top: 10px;padding-top: 10px;display: flex;justify-content: space-around">
+                <ng-container *ngIf="(params$ | async).id">
+                    <a [queryParams]="{ mission : 'load', id: (params$ | async).id }" [routerLink]="['']" class="btn btn-primary" title="charger">Charger</a>
+                </ng-container>
+                <button [appLoadingButton]="(submitting$ | async)" [disabled]="rootGroup.invalid || (submitting$ | async)" [libelle]="'Valider'" class="btn btn-primary" type="submit">Sauvegarder</button>
+            </footer>
+        </form>
+    <!--<pre style="height: 100px;overflow-y: auto">{{payLoad}}</pre>-->
+</div>

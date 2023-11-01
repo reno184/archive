@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "wiki-crm"
+  },
+  "targets": {
+    "wiki-crm": {
+      "hosting": {
+        "englishBen": [
+          "english-ben"
+        ]
+      }
+    }
+  }
+}

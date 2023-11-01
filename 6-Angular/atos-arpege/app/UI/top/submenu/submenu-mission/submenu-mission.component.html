@@ -1,0 +1,36 @@
+<ng-container *ngIf="(mission$  | async ).id === ''">
+    <div style="border-bottom: solid 1px white;text-align: center; padding: 10px 5px">
+        <a class="text-white" routerLink="/modal/setup/list" title="Charger une préparation mission">Charger nouvelle</a>
+    </div>
+</ng-container>
+<ng-container *ngIf="(mission$  | async ).id !== ''">
+    <div style="border-bottom: solid 1px white;text-align: center; padding: 10px 0"> {{(mission$  | async).name}}</div>
+    <span>{{(mission$  | async)['all-pci-connected']}}</span>
+    <!--    <ng-container *ngIf="(noPci$ | async) === true">
+            <div style="text-align: center; padding: 20px 5px"><small><i class="far fa-spinner fa-spin"></i><br>Récupération des infos</small></div>
+        </ng-container>-->
+
+                <ul>
+ <!--       <li style="padding: 10px 5px; border-bottom: solid 1px transparent">
+            <a (click)="toggleState()" class="link" title="{{ labels.constantes.start }}"><i class="far fa-play-circle"></i>{{ labels.constantes.start }}</a>
+        </li>-->
+        <li *ngFor="let pci of (mission$  | async )['mission-pci-list'] as list; let i = index" class="border border-white" style="border-bottom: solid 1px transparent">
+
+                <a (click)="tooglePCI(i)" [ngClass]="{ active: index === i }" class="arrow_downup " style="display: flex; align-items: center; padding : 7px 5px;" title="{{staticDatas.labels.toggle }}">
+                    <span style="flex: 1;">
+                    <strong [ngStyle]="{color : staticConfig.PciStatusType[pci['pci-connected']].color}">.</strong>{{ pci['pci-name'] }}
+                    </span>
+                    <i class="far fa-chevron-circle-down"></i>
+                </a>
+                <div [ngClass]="{ active: i === index }" class="content_downup" style="padding: 0 0 10px 15px">
+                    <small>
+                        <i class="far {{staticConfig.PciStatusType[pci['pci-connected']].icon}}" style="margin-right: 5px"></i>{{staticConfig.PciStatusType[pci['pci-connected']].lib}}
+                    </small>
+                </div>
+
+        </li>
+        </ul>
+
+</ng-container>
+
+

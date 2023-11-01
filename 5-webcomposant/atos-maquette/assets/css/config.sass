@@ -1,0 +1,56 @@
+@font-face
+ font-family: "Ubuntu"
+ src: url("../Ubuntu/Ubuntu-Medium.ttf") format('truetype')
+
+$default-text-color:#333
+$default-color-primary:royalblue
+$default-color-secondary:dodgerblue
+$alert-color-primary : #dc1212
+$alert-color-secondary : #c00
+
+$sidebar-right-width : 251px
+
+=transform($property)
+  -webkit-transform: $property
+  transform: $property
+
+=transition($property)
+  transition: $property
+  -webkit-transition: $property
+=transition2($property1,$property2)
+  transition: $property1,$property2
+  -webkit-transition: $property1,$property2
+=transition3($property1,$property2, $property3)
+  transition: $property1,$property2,$property3
+  -webkit-transition: $property1,$property2,$property3
+
+@mixin animation($animate...)
+    $max: length($animate)
+    $animations: ''
+
+    @for $i from 1 through $max
+        $animations: #{$animations + nth($animate, $i)}
+
+        @if $i < $max
+            $animations: #{$animations + ", "}
+
+
+    -webkit-animation: $animations
+    -moz-animation:    $animations
+    -o-animation:      $animations
+    animation:         $animations
+
+
+@mixin keyframes($animationName)
+    @-webkit-keyframes #{$animationName}
+        @content
+
+    @-moz-keyframes #{$animationName}
+        @content
+
+    @-o-keyframes #{$animationName}
+        @content
+
+    @keyframes #{$animationName}
+        @content
+

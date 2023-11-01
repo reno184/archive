@@ -1,0 +1,78 @@
+<div *ngIf="getUser() === 'PPSRM'; then pnlPpsrm; else pnlPci"></div>
+<ng-template #pnlPpsrm>
+
+        <div *ngIf="
+                (pciArray$ | async).length > 0;
+                then dataBlock;
+                else noDataBlock
+            "></div>
+        <ng-template #noDataBlock>
+              <ul>
+                <li>
+                  <small class="text-danger">{{ staticDatas.labels['no-datas'] }}</small>
+                </li>
+              </ul>
+        </ng-template>
+        <ng-template #dataBlock>
+            <ul>
+              <li class="menu-item border-color" style="padding: 0 5px;border-bottom: solid 1px transparent">
+                <span style="flex: 1">LVC16</span>
+                <ul *ngIf="jreState$ | async as ls">
+                  <li>
+                    <strong style="margin-right: 5px;margin-left: 5px">{{ labelInfo.jre_cnx.lib }}: </strong><span>{{ getJreLinkName(ls.cnx_st) }}</span>
+                  </li>
+                  <li>
+                    <strong style="margin-right: 5px;margin-left: 5px">{{ labelInfo.jre_rtc.lib }}: </strong><span>{{ getJreRttName(ls.rtc_st) }}</span>
+                  </li>
+                  <li>
+                    <strong style="margin-right: 5px;margin-left: 5px">{{ labelInfo.jre_lat.lib }}: </strong><span>{{ ls.latency }} ms</span>
+                  </li>
+                </ul>
+              </li>
+              <li *ngFor="let r of pciArray$ | async; let i = index" class="menu-item border-color" style="padding: 0 5px;border-bottom: solid 1px transparent">
+                  <a (click)="tooglePCI(i)" [ngClass]="{ active: i === index }" class="arrow_downup " style="display: flex; align-items: center" title="{{ staticDatas.labels.toggle }}">
+                      <span style="flex: 1">{{ r.name }}</span>
+                      <i class="far fa-chevron-circle-down"></i>
+                  </a>
+                  <ul [ngClass]="{ active: i === index }" class="content_downup">
+                      <li>
+                          <i class="far {{getColorIcon(r.status)}} {{getTypeIcon(r.status)}}" style="margin-right: 5px;margin-left: 5px"></i>
+                          <span style="flex: 1">{{ getStatusName(r.status)}}</span>
+                      </li>
+                      <div *ngIf="r.status === pciStatusType.CONNECTED">
+                        <li>
+                          <span style="margin-right: 5px;margin-left: 5px">{{ labelInfo.jre_lat.lib }}: {{ r.jre_latency }} ms</span>
+                        </li>
+                        <li>
+                          <span style="margin-right: 5px;margin-left: 5px">{{ labelInfo.com_lat.lib }}: {{ r.com_latency }} ms</span>
+                        </li>
+                        <li>
+                          <span style="margin-right: 5px;margin-left: 5px">{{ labelInfo.clock_shift.lib }}: {{ r.clock_shift }} ms</span>
+                        </li>
+                      </div>
+                  </ul>
+              </li>
+            </ul>
+        </ng-template>
+
+</ng-template>
+<ng-template #pnlPci>
+  <ul>
+    <li class="menu-item border-color" style="padding: 0 5px;border-bottom: solid 1px transparent">
+      <span style="flex: 1">LVC16</span>
+      <ul *ngIf="jreState$ | async as ls">
+        <li>
+          <span style="margin-right: 5px;margin-left: 5px">{{ labelInfo.jre_cnx.lib }}: {{ getJreLinkName(ls.cnx_st) }}</span>
+        </li>
+        <li>
+          <span style="margin-right: 5px;margin-left: 5px">{{ labelInfo.jre_rtc.lib }}: {{ getJreRttName(ls.rtc_st) }}</span>
+        </li>
+        <div *ngIf="pciArray$ | async as r">
+          <li *ngIf="r[0].status === pciStatusType.CONNECTED">
+            <span style="margin-right: 5px">{{ labelInfo.jre_lat.lib }}: {{ r[0].jre_latency }} ms</span>
+          </li>
+        </div>
+      </ul>
+    </li>
+  </ul>
+</ng-template>

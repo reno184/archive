@@ -1,0 +1,9 @@
+{
+    "stop": {
+        "lib": "Stop émission",
+        "title": "Stopper émission"
+    },
+    "tous": {
+        "lib": "Tous les pci"
+    }
+}
