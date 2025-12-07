@@ -1,6 +1,18 @@
 # CRM
 
-CRM est site d'entrainement
+CRM est site d'entrainement, 
+si besoin de recoder un site comme ContentFull, cela peut être une bonne base, de travail.
+
+Il faudra changer de language car angular, rxjs, et store sont trop verbeux.
+
+La structure HTML c'est ok, le menu responsive avec bootstrap sont ok
+
+Les cloud function en js c'est ok, du travail sur le storage.
+
+
+> La technique de resize d'image peut-être overkill car il faut gérér plusieurs images dans le storage c'est galère. Mieux vaut charger toutes les images en haute définition au chargement d'une page puis les afficher, à voir...
+
+> Mieux vaut ne pas utiliser fireabse pour le stockage du text, mais plutôt lowDB, le contenu sera plus rapide à charger.
 
 # technical architecture
 - fontawesome *regular*
@@ -11,18 +23,19 @@ CRM est site d'entrainement
 - ngrx
 - editor markdown
 
-
 ## Technique utile
 
 - store & immutability
-- size-detector component
+- size-detector, confirm-delete, toaster component
+- toaster
 - animation
 - resize img
-- guard
+- async guard
+- cloud function storage
 
 ## layout css
 - modal layout, media query
-- there is a menu component responsive `xs-menu-component`
+- il y a 3 menu différents, un pour desktop un bandeau fixe, en mobile une popover sur le menu du haut, et mobile un drawer.
 
 ## cloud function
 > language used is javascript
@@ -38,8 +51,6 @@ CRM est site d'entrainement
 - npm underscore.string
 - npm sanitize-html
 
-
-
 ### authentification
 
 - Afficher le nom de l'utilisateur
@@ -52,9 +63,6 @@ besoin de plus d'infos il est possible de lire le token du localstorage.
 
 **Limiter les routes (guard)**
 La fonction canActivate peut être asynchrone donc du coup il faut faire un refreshToken à chaque changement de route
-
-**Todo**
-todo sanitize et slug
 
 ## Voir pour les images
 
