@@ -1,14 +1,6 @@
-# Site exemple web-components
-Fonctionne avec emulator start et la base donnée est un json statique.
-```
-firebase emulators:start
-```
-Cloud function 
-- Application express 
-- hellword
+## A récupérer, inspiration
 
-- front client
-    - resize de modal
-    - d3 list animation
-    - greensock yoyo
-    - change color background
+- bonne pratiques web components
+- Icon Mamba vert
+- d3 list animation
+- change color background (pas de greensock)

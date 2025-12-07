@@ -26,7 +26,7 @@ background: linear-gradient(to bottom, #493240, #FF0099); /* W3C, IE 10+/ Edge, 
 
 }
 
-.sunset {
+.· {
   background: #ad5389; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #ad5389, #3c1053); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #ad5389, #3c1053); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
